@@ -1,0 +1,32 @@
+[
+    {
+        "text": "Accueil",
+        "color": "text-white",
+        "path": "/",
+        "styles": "font-bold"
+    },
+    {
+        "text": "Favoris",
+        "color": "text-white",
+        "path": "/favorites",
+        "styles": "font-light"
+    },
+    {
+        "text": "Vues",
+        "color": "text-white",
+        "path": "/views",
+        "styles": "font-light"
+    },
+    {
+        "text": "Playlist",
+        "color": "text-white",
+        "path": "/playlist",
+        "styles": "font-light"
+    },
+    {
+        "text": "Search",
+        "color": "text-white",
+        "path": "/search",
+        "styles": "font-light"
+    }
+]
