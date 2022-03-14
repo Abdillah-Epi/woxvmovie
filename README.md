@@ -28,3 +28,17 @@ To realize this mini project I opted for those stacks 🎉
 
 <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;<a href="https://www.framer.com/motion/" target="_blank" rel="noreferrer"> <img src="https://user-images.githubusercontent.com/51588681/158126636-ebb2e97b-77d2-474d-abfd-1cb81f2eb1c9.svg" alt="mysql" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;<a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;<a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://user-images.githubusercontent.com/51588681/158127328-b1a235e9-4b12-493a-993f-4cfca76af8a7.svg" alt="typescript" width="40" height="40"/> </a>
 
+## Requirement to run the project
+
+1. rename the `.env.template` into `.env`
+2. put the [API]("https://github.com/Abdillah-Epi/woxv-movie-api") url `VITE_API_URL=`
+3. put the client id and secret of the [API]("https://github.com/Abdillah-Epi/woxv-movie-api") `VITE_CLIENT_ID=` / `VITE_CLIENT_SECRET=`
+
+## How to run the API
+*you just need [docker](https://docs.docker.com/get-docker/) installed in your pc*
+````
+make web-dev-log or yarn dev --host
+````
+or by running `make` it will display the helper
+
+![preview](https://github.com/Abdillah-Epi/)
