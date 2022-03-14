@@ -6,6 +6,7 @@ import { PlaylistsMoviesAtomFamily } from '../../../store/movies';
 import { TVMovie } from '../../../store/types';
 import ListMaker from '../../molecules/ListMaker';
 import Nav from '../../molecules/Nav';
+import img_movie from '../../../assets/images/movie.svg';
 
 const OPlaylistView = () => {
     const params = useParams();
@@ -35,6 +36,11 @@ const OPlaylistView = () => {
             <div className='flex flex-col items-start justify-center space-y-6 xl:pl-20'>
                 {movies.length > 0 && <ListMaker show={true} movies={movies} />}
                 {backup.length > 0 && movies.length < 1 && <ListMaker show={true} movies={backup} />}
+                {!movies.length && !backup.length && (
+                    <div className='flex h-full w-full items-center justify-center'>
+                        <img className='w-1/2' src={img_movie} alt='' />
+                    </div>
+                )}
             </div>
         </div>
     );

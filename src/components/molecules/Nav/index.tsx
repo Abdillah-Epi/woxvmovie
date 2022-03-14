@@ -114,7 +114,7 @@ const Nav: React.FC<NavProps> = ({
                         : (size === 'xl' || size === 'lg') && (
                               <div className='flex space-x-5'>
                                   <Regular text={'Logout'} styles='font-light cursor-pointer' color='text-white' />
-                                  <Regular text={'Delete'} styles='font-light cursor-pointer' color='text-red-600' />
+                                  <Regular text={'Delete'} styles='font-bold cursor-pointer' color='text-red-500' />
                               </div>
                           )}
                     {size !== 'xl' && size !== 'lg' && <Hamburger />}

@@ -11,7 +11,7 @@ import RemoveCategory from '../../molecules/RemoveCategory';
 const CategoriesBackdrop: React.FC = () => {
     const [categories, setCategories] = useRecoilState(categoriesAtom);
     const [selected, resetSelection] = useRecoilState(categoriesSelectedAtom);
-    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Valider'));
+    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Validate'));
     const { updateUserGenres } = useMovie();
 
     const navigate = useNavigate();

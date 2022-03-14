@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 type AverageProps = {
     average: number;
@@ -13,7 +13,7 @@ const draw = {
             pathLength: length / 10,
             opacity: 1,
             transition: {
-                pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
+                pathLength: { delay, type: 'spring', duration: 1.5, bounce: 0 },
                 opacity: { delay, duration: 0.01 }
             }
         };
@@ -21,12 +21,12 @@ const draw = {
 };
 
 const Average: React.VFC<AverageProps> = ({ average }) => {
-    const [per, setPer] = useState<string>("--%");
+    const [per, setPer] = useState<string>('--%');
 
     return (
         <div className='relative flex items-center justify-center'>
             <motion.svg
-                className={""}
+                className={''}
                 width='200'
                 height='200'
                 viewBox='0 0 600 600'
@@ -38,7 +38,7 @@ const Average: React.VFC<AverageProps> = ({ average }) => {
                     cx='300'
                     cy='300'
                     r='200'
-                    className={"rounded-full fill-transparent stroke-green-500 stroke-[12px]"}
+                    className={'rounded-full fill-transparent stroke-woxvmoie-2 stroke-[12px]'}
                     variants={draw}
                     strokeLinecap='round'
                     custom={{ i: 0.5, length: average }}

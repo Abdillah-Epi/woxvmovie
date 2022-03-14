@@ -816,6 +816,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 10%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .min-w-\[15rem\] {
   min-width: 15rem;
 }
@@ -1120,6 +1124,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(89 89 89 / 0.5);
 }
 
+.bg-black\/70 {
+  background-color: rgb(0 0 0 / 0.7);
+}
+
+.bg-black\/10 {
+  background-color: rgb(0 0 0 / 0.1);
+}
+
+.bg-black\/30 {
+  background-color: rgb(0 0 0 / 0.3);
+}
+
 .bg-cover {
   background-size: cover;
 }
@@ -1142,6 +1158,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .stroke-green-500 {
   stroke: #22c55e;
+}
+
+.stroke-woxvmoie-2 {
+  stroke: #F25D27;
 }
 
 .stroke-\[12px\] {
@@ -1390,6 +1410,11 @@ body {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 @media (min-width: 640px) {

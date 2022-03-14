@@ -209,7 +209,10 @@ export const ViewsSelector = selector<TVMovie[] | null | number>({
         }
         const res = await response.json().then((res: ViewsResponse) => {
             if (res.success) {
-                return res.movies;
+                if (!res.movies) return [];
+                const arr = res.movies.map(m => m.id);
+                const r = res.movies.filter(({ id }, index) => !arr.includes(id, index + 1));
+                return r;
             } else {
                 return null;
             }
@@ -402,7 +405,10 @@ export const PlaylistsSelectorFamily = selectorFamily<TVMovie[] | null | number,
             }
             const res = await response.json().then((res: PlaylistsResponse) => {
                 if (res.success) {
-                    return res.movies;
+                    if (!res.movies) return [];
+                    const arr = res.movies.map(m => m.id);
+                    const r = res.movies.filter(({ id }, index) => !arr.includes(id, index + 1));
+                    return r;
                 } else {
                     return null;
                 }

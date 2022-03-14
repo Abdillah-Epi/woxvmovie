@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { categoriesAtom, categoriesSelectedAtom } from "../../../store/movies";
-import AddCategory from "../../molecules/AddCategory";
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { categoriesAtom, categoriesSelectedAtom } from '../../../store/movies';
+import AddCategory from '../../molecules/AddCategory';
 
 const CategoriesPoster: React.FC = () => {
     const categories = useRecoilValue(categoriesAtom);

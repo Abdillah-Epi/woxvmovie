@@ -25,7 +25,7 @@ const QuickPlaylist: React.FC<QuickPlaylistProps> = ({}) => {
                     <div className='flex w-full justify-end py-5 pr-10'>
                         <img
                             onClick={() => setState(() => ({ id: -1, state: false }))}
-                            className='h-4 w-4 lg:h-8 lg:w-8'
+                            className='h-4 w-4 cursor-pointer lg:h-8 lg:w-8'
                             src={close}
                             alt=''
                         />

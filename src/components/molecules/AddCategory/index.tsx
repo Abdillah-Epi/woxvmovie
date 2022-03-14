@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { useSetRecoilState } from "recoil";
-import { CategoriesData, categoriesSelectedAtom } from "../../../store/movies";
-import Poster from "../../atoms/Poster";
-import Body from "../../atoms/Typography/Body";
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { CategoriesData, categoriesSelectedAtom } from '../../../store/movies';
+import Poster from '../../atoms/Poster';
+import Body from '../../atoms/Typography/Body';
 
 export type AddCategoryProps = {
     category: CategoriesData;
@@ -43,7 +43,7 @@ const AddCategory: React.FC<AddCategoryProps> = ({ category, index }) => {
             exit='exit'
             custom={index}
             layoutId={category.name}
-            className='relative'
+            className='relative cursor-pointer'
         >
             <motion.div>
                 <Poster styles='rounded-md brightness-50' url={category.poster} />

@@ -36,7 +36,7 @@ const PlaylistWatcher: React.FC<PlaylistWatcherProps> = ({ id }) => {
 };
 
 const OPlaylist: React.FC<OPlaylistProps> = ({}) => {
-    const [isClicked, resetClick] = useRecoilState(isClickedAtomFamily('CRÉER'));
+    const [isClicked, resetClick] = useRecoilState(isClickedAtomFamily('CREATE'));
     const [name, resetName] = useRecoilState(InputAtomFamily('playlist'));
     const [playlist, updatePlaylist] = useRecoilState(PlaylistsAtom);
     const { createPlaylist, deletePlaylist, setOAuth, setAccessToken } = usePlaylist();
