@@ -41,4 +41,4 @@ make web-dev-log or yarn dev --host
 ````
 or by running `make` it will display the helper
 
-![preview](https://github.com/Abdillah-Epi/)
+![preview](https://github.com/Abdillah-Epi/woxvmovie/blob/master/woxvmoie.gif)
