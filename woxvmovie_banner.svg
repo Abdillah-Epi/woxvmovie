@@ -70,7 +70,10 @@
 				}
 			</style>
 			<div class="container">
-				<span><img src='./src/assets/images/logo.svg' width="100" height="100" alt='' /></span><h1>WOXVMOVIE</h1>
+				<span><svg width="105" height="113" viewBox="0 0 105 113" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="4" width="105" height="106" rx="21" fill="black"/>
+<path d="M81.2031 20.75V89H64.7969L40.6562 46.5312V89H24.2031V20.75H40.6562L64.7969 63.2188V20.75H81.2031Z" fill="#F24C27"/>
+</svg></span><h1>WOXVMOVIE</h1>
 			</div>
 		</div>
 	</foreignObject>
