@@ -11,10 +11,10 @@ const FeaturesWalkThrough: React.FC<FeaturesWalkThroughProps> = () => {
         <motion.section>
             <Feature
                 key={1}
-                title='Watch Woxvmoie on your TV.'
-                text='Watch Woxvmoie on your Smart TV, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.'
+                title='Watch Woxvmovie on your TV.'
+                text='Watch Woxvmovie on your Smart TV, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.'
                 video={tv}
-                styles={'bg-woxvmoie-5'}
+                styles={'bg-woxvmovie-5'}
             />
             <Feature
                 key={2}

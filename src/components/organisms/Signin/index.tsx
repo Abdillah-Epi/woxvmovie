@@ -104,7 +104,7 @@ const OSignin: React.FC = () => {
                                 styles='font-light text-xs lg:text-base'
                                 span='Remember me'
                                 spanColor='text-white'
-                                color='accent-woxvmoie-2'
+                                color='accent-woxvmovie-2'
                             />
                             <p
                                 onClick={() => navigate('/reset-password')}
@@ -122,7 +122,7 @@ const OSignin: React.FC = () => {
                             icon={{ icon: google, pos: 'left', styles: 'w-4 h-4' }}
                         />
                         <div className='flex space-x-2 pt-4'>
-                            <p className='text-xs font-light text-white lg:text-base'>First visit to Woxvmoie?</p>
+                            <p className='text-xs font-light text-white lg:text-base'>First visit to Woxvmovie?</p>
                             <span>
                                 <Link
                                     styles='text-xs lg:text-base'

@@ -76,7 +76,7 @@ const Nav: React.FC<NavProps> = ({
         <div className='flex w-full items-center justify-between'>
             <motion.div initial='hidden' animate='show' exit='exit' className={`w-[90%] ${styles}`}>
                 <motion.div variants={animation ? variantHeader : {}}>
-                    <Header styles='cursor-pointer' fontSize={fontSize} text={'WOXVMOVIE'} color={'text-woxvmoie-3'} />
+                    <Header styles='cursor-pointer' fontSize={fontSize} text={'WOXVMOVIE'} color={'text-woxvmovie-3'} />
                 </motion.div>
                 {links && (
                     <>

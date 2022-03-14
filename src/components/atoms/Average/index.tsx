@@ -38,7 +38,7 @@ const Average: React.VFC<AverageProps> = ({ average }) => {
                     cx='300'
                     cy='300'
                     r='200'
-                    className={'rounded-full fill-transparent stroke-woxvmoie-2 stroke-[12px]'}
+                    className={'rounded-full fill-transparent stroke-woxvmovie-2 stroke-[12px]'}
                     variants={draw}
                     strokeLinecap='round'
                     custom={{ i: 0.5, length: average }}

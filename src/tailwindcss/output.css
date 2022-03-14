@@ -1083,7 +1083,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 1px;
 }
 
-.bg-woxvmoie-5 {
+.bg-woxvmovie-5 {
   --tw-bg-opacity: 1;
   background-color: rgb(13 13 13 / var(--tw-bg-opacity));
 }
@@ -1111,7 +1111,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-woxvmoie-3 {
+.bg-woxvmovie-3 {
   --tw-bg-opacity: 1;
   background-color: rgb(242 76 39 / var(--tw-bg-opacity));
 }
@@ -1120,7 +1120,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(71 85 105 / 0.8);
 }
 
-.bg-woxvmoie-4\/50 {
+.bg-woxvmovie-4\/50 {
   background-color: rgb(89 89 89 / 0.5);
 }
 
@@ -1160,7 +1160,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   stroke: #22c55e;
 }
 
-.stroke-woxvmoie-2 {
+.stroke-woxvmovie-2 {
   stroke: #F25D27;
 }
 
@@ -1326,7 +1326,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-woxvmoie-2 {
+.text-woxvmovie-2 {
   --tw-text-opacity: 1;
   color: rgb(242 93 39 / var(--tw-text-opacity));
 }
@@ -1336,7 +1336,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.text-woxvmoie-3 {
+.text-woxvmovie-3 {
   --tw-text-opacity: 1;
   color: rgb(242 76 39 / var(--tw-text-opacity));
 }
@@ -1346,7 +1346,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
-.accent-woxvmoie-2 {
+.accent-woxvmovie-2 {
   accent-color: #F25D27;
 }
 
@@ -1401,7 +1401,7 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:bg-woxvmoie-2:hover {
+.hover\:bg-woxvmovie-2:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(242 93 39 / var(--tw-bg-opacity));
 }

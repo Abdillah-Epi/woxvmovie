@@ -17,7 +17,7 @@ const Footer = () => {
                         list={['Anglais']}
                     />
                 </div>
-                <Regular color='' text='Woxvmoie France' />
+                <Regular color='' text='Woxvmovie France' />
             </div>
         </div>
     );

@@ -1,12 +1,12 @@
-import React, { Suspense } from "react";
-import Header from "../../atoms/Typography/Header";
-import Regular from "../../atoms/Typography/Regular";
-import infos from "../../../assets/images/infos.svg";
-import Button from "../../atoms/Button";
-import { Like, Playlist } from "../PosterInfos";
-import { useRecoilValue } from "recoil";
-import { movieSelectedAtom } from "../../../store/movies";
-import { LikeWatcher } from "../../organisms/Category";
+import React, { Suspense } from 'react';
+import Header from '../../atoms/Typography/Header';
+import Regular from '../../atoms/Typography/Regular';
+import infos from '../../../assets/images/infos.svg';
+import Button from '../../atoms/Button';
+import { Like, Playlist } from '../PosterInfos';
+import { useRecoilValue } from 'recoil';
+import { movieSelectedAtom } from '../../../store/movies';
+import { LikeWatcher } from '../../organisms/Category';
 
 type DescriptionProps = {
     title: string;
@@ -48,10 +48,10 @@ const Description: React.FC<DescriptionProps> = ({ title, body, mores, reactions
             <div className='w-[70%] sm:w-[40%]'>
                 {!reactions ? (
                     <Button
-                        textStyles={{ styles: "text-xs 2xl:text-base", textPos: "center", textColor: "text-white" }}
-                        styles='rounded-sm bg-woxvmoie-4/50'
+                        textStyles={{ styles: 'text-xs 2xl:text-base', textPos: 'center', textColor: 'text-white' }}
+                        styles='rounded-sm bg-woxvmovie-4/50'
                         text="Plus d'informations"
-                        icon={{ icon: infos, pos: "left", styles: "w-3 h-3 sm:w-4 sm:h-4" }}
+                        icon={{ icon: infos, pos: 'left', styles: 'w-3 h-3 sm:w-4 sm:h-4' }}
                     />
                 ) : (
                     <Actions />

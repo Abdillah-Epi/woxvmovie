@@ -145,7 +145,7 @@ const OSignup: React.FC = () => {
                             />
                             <div className='flex flex-col pt-4 lg:flex-row lg:items-center lg:space-x-2'>
                                 <p className='text-xs font-light text-white lg:text-base'>
-                                    Already have an account with Woxvmoie?
+                                    Already have an account with Woxvmovie?
                                 </p>
                                 <span>
                                     <Link

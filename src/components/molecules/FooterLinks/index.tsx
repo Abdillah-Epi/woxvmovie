@@ -10,7 +10,7 @@ const links = [
     'Account',
     'Reading modes',
     'Legal information',
-    'Original programmes Woxvmoie',
+    'Original programmes Woxvmovie',
     'Presse',
     'Terms of use',
     'Contact us'

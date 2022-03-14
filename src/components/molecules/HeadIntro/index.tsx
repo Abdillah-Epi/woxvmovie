@@ -15,7 +15,7 @@ const HeadIntro: React.FC<HeadIntroProps> = () => {
             <div className='sm:w-[50%]'>
                 <Body
                     text={
-                        'Ready to watch Woxvmoie? Enter your email address to subscribe or reactivate your subscription.'
+                        'Ready to watch Woxvmovie? Enter your email address to subscribe or reactivate your subscription.'
                     }
                     color={'text-white'}
                 />

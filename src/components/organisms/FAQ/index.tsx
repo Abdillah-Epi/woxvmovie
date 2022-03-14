@@ -32,7 +32,7 @@ const FAQ: React.FC<FAQProps> = () => {
             </motion.div>
             <motion.div variants={variantDefault} custom={1} className='text-center lg:text-left'>
                 <Regular
-                    text='Ready to watch Woxvmoie? Enter your email address to subscribe or reactivate your subscription.'
+                    text='Ready to watch Woxvmovie? Enter your email address to subscribe or reactivate your subscription.'
                     color='text-white'
                 />
             </motion.div>
