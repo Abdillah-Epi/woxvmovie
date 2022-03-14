@@ -1,24 +1,24 @@
 [
     {
-        "text": "Accueil",
+        "text": "Home",
         "color": "text-white",
         "path": "/",
         "styles": "font-bold"
     },
     {
-        "text": "Favoris",
+        "text": "Favorites",
         "color": "text-white",
         "path": "/favorites",
         "styles": "font-light"
     },
     {
-        "text": "Vues",
+        "text": "Views",
         "color": "text-white",
         "path": "/views",
         "styles": "font-light"
     },
     {
-        "text": "Playlist",
+        "text": "Playlists",
         "color": "text-white",
         "path": "/playlist",
         "styles": "font-light"

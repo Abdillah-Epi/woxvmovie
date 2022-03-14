@@ -1,5 +1,5 @@
-import React from "react";
-import Sidenav from "../../organisms/Sidenav";
+import React from 'react';
+import Sidenav from '../../organisms/Sidenav';
 
 type TSignupProps = {};
 
@@ -10,8 +10,8 @@ const TSignup: React.FC<TSignupProps> = ({ children }) => {
             <div className='fixed top-0 w-[80%]'>
                 <Sidenav
                     list={[
-                        { path: "/", text: "Accueil" },
-                        { path: "/signin", text: "Signin" }
+                        { path: '/', text: 'Home' },
+                        { path: '/signin', text: 'Signin' }
                     ]}
                 />
             </div>

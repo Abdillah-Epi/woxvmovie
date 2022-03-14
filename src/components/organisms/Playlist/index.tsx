@@ -83,7 +83,7 @@ const OPlaylist: React.FC<OPlaylistProps> = ({}) => {
             <div className='flex h-[90%] w-full flex-col items-center justify-center space-y-6 xl:pl-20'>
                 <motion.div initial='hidden' animate='show' exit='exit' className='w-full space-y-10 xl:w-[30%]'>
                     <motion.div variants={variantPlaylist}>
-                        <InputCreator type='text' id='playlist' btn='CRÉER' placeHolder='Name' />
+                        <InputCreator type='text' id='playlist' btn='CREATE' placeHolder='Name' />
                     </motion.div>
                     <motion.div initial='hidden' animate='show' exit='exit' className='w-full space-y-5 '>
                         {playlist.map((p, key) => {

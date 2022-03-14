@@ -7,7 +7,7 @@ const LandingPage: React.FC = ({ children }) => {
         <motion.div exit={{ opacity: 0 }} className='sticky'>
             <div className='flex flex-col overflow-y-scroll bg-black'>{children}</div>
             <div className='fixed top-0 w-[80%]'>
-                <Sidenav list={[{ path: '/signin', text: "S'identifier" }]} />
+                <Sidenav list={[{ path: '/signin', text: 'Login' }]} />
             </div>
         </motion.div>
     );

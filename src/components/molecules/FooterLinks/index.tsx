@@ -1,19 +1,19 @@
 const links = [
-    "FAQ",
-    "Relations Investisseurs",
-    "Confidentialité",
-    "Test de vitesse",
-    "Centre d'aide",
-    "Recrutement",
-    "Préférences de cookies",
-    "Informations légales",
-    "Compte",
-    "Modes de lecture",
-    "Mentions légales",
-    "Programmes originaux Woxvmoie",
-    "Presse",
-    "Conditions d'utilisation",
-    "Nous contacter"
+    'FAQ',
+    'Investor Relations',
+    'Confidentiality',
+    'Speed test',
+    'Helpdesk',
+    'Recruitment',
+    'Cookie preferences',
+    'Legal information',
+    'Account',
+    'Reading modes',
+    'Legal information',
+    'Original programmes Woxvmoie',
+    'Presse',
+    'Terms of use',
+    'Contact us'
 ];
 const FooterLinks = () => {
     return (

@@ -1,10 +1,10 @@
-import React from "react";
-import Regular from "../../atoms/Typography/Regular";
-import InputCreator from "../../molecules/InputCreator";
-import Question from "../../molecules/Question";
-import questions from "./questions.json";
-import { motion } from "framer-motion";
-import { variantDefault, variantList } from "./motion";
+import React from 'react';
+import Regular from '../../atoms/Typography/Regular';
+import InputCreator from '../../molecules/InputCreator';
+import Question from '../../molecules/Question';
+import questions from './questions.json';
+import { motion } from 'framer-motion';
+import { variantDefault, variantList } from './motion';
 type FAQProps = {};
 
 const FAQ: React.FC<FAQProps> = () => {
@@ -16,10 +16,10 @@ const FAQ: React.FC<FAQProps> = () => {
             className='flex w-full flex-col items-center space-y-10 py-14'
         >
             <Regular
-                styles={"font-semibold"}
-                fontSize={"text-sm sm:text-3xl xl:text-5xl"}
-                text={"Foire aux questions"}
-                color={"text-white"}
+                styles={'font-semibold'}
+                fontSize={'text-sm sm:text-3xl xl:text-5xl'}
+                text={'FAQ'}
+                color={'text-white'}
             />
             <motion.div initial='hidden' animate='show' exit='exit' className='w-[90%] space-y-2 xl:w-[50%]'>
                 {questions.map((q, key) => {
@@ -32,7 +32,7 @@ const FAQ: React.FC<FAQProps> = () => {
             </motion.div>
             <motion.div variants={variantDefault} custom={1} className='text-center lg:text-left'>
                 <Regular
-                    text='Prêt à regarder Woxvmoie ? Saisissez votre adresse e-mail pour vous abonner ou réactiver votre abonnement.'
+                    text='Ready to watch Woxvmoie? Enter your email address to subscribe or reactivate your subscription.'
                     color='text-white'
                 />
             </motion.div>

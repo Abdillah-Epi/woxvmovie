@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { variantBodyIn } from './motion';
 
 const FormsData = {
-    title: "S'identifier",
+    title: 'Login',
     inputs: [
         {
             placeHolder: 'E-mail',
@@ -28,14 +28,14 @@ const FormsData = {
             id: 'password-signin'
         }
     ],
-    btn: "S'identifier"
+    btn: 'Login'
 };
 
 const OSignin: React.FC = () => {
     const [email, setEmail] = useRecoilState(InputAtomFamily('email-signin'));
     const [password, setPassword] = useRecoilState(InputAtomFamily('password-signin'));
 
-    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily("S'identifier"));
+    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Login'));
     const { oauth } = useAuth();
 
     const navigate = useNavigate();
@@ -102,7 +102,7 @@ const OSignin: React.FC = () => {
                         <div className='flex items-center justify-between py-4'>
                             <Checkbox
                                 styles='font-light text-xs lg:text-base'
-                                span='Se souvenir de moi'
+                                span='Remember me'
                                 spanColor='text-white'
                                 color='accent-woxvmoie-2'
                             />
@@ -110,25 +110,25 @@ const OSignin: React.FC = () => {
                                 onClick={() => navigate('/reset-password')}
                                 className='cursor-pointer text-xs font-light text-white lg:text-base'
                             >
-                                mot de passe oublier ?
+                                forget password ?
                             </p>
                         </div>
                         <Link
                             path='/signin'
                             id='google-signin'
                             styles='font-light text-xs lg:text-base'
-                            text="S'identifier avec Google"
+                            text='Sign in with Google'
                             color='text-white'
                             icon={{ icon: google, pos: 'left', styles: 'w-4 h-4' }}
                         />
                         <div className='flex space-x-2 pt-4'>
-                            <p className='text-xs font-light text-white lg:text-base'>Première visite sur Woxvmoie ?</p>
+                            <p className='text-xs font-light text-white lg:text-base'>First visit to Woxvmoie?</p>
                             <span>
                                 <Link
                                     styles='text-xs lg:text-base'
                                     id='to-signup'
                                     path='/signup'
-                                    text='Inscrivez-vous'
+                                    text='Register'
                                     color='text-white'
                                 />
                             </span>

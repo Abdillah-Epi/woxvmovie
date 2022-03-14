@@ -59,7 +59,7 @@ const FormsData = {
             id: 'password-signup'
         }
     ],
-    btn: 'Continuer'
+    btn: 'Continue'
 };
 
 const OSignup: React.FC = () => {
@@ -68,7 +68,7 @@ const OSignup: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Continuer'));
+    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Continue'));
     const { oauth, signupWithGoogle, setOAuth } = useAuth();
 
     const { signup } = useAuth();
@@ -79,7 +79,7 @@ const OSignup: React.FC = () => {
         setEmail(c => ({ ...c, error: '' }));
         setPassword(c => ({ ...c, error: '' }));
         email.value === '' && setEmail(c => ({ ...c, error: "l'email est requis." }));
-        password.value === '' && setPassword(c => ({ ...c, error: 'le mot de passe est requis.' }));
+        password.value === '' && setPassword(c => ({ ...c, error: 'the password is required.' }));
         if (email.value === '' || password.value === '') return;
 
         signup({ email: email.value, password: password.value }).then(res => {
@@ -100,10 +100,10 @@ const OSignup: React.FC = () => {
             }
             res.error.map(e => {
                 if ('VALIDATOR_EMAIL_EMAIL' in e) {
-                    setEmail(c => ({ ...c, error: "ceci n'est pas un email, veuillez entrer un email." }));
+                    setEmail(c => ({ ...c, error: 'this is not an email, please enter an email.' }));
                 }
                 if ('VALIDATOR_PASSWORD_MIN' in e) {
-                    setPassword(c => ({ ...c, error: 'il faut au minimum 4 caractère.' }));
+                    setPassword(c => ({ ...c, error: 'a minimum of 4 characters is required.' }));
                 }
             });
         });
@@ -145,14 +145,14 @@ const OSignup: React.FC = () => {
                             />
                             <div className='flex flex-col pt-4 lg:flex-row lg:items-center lg:space-x-2'>
                                 <p className='text-xs font-light text-white lg:text-base'>
-                                    Déjà un compte chez Woxvmoie ?
+                                    Already have an account with Woxvmoie?
                                 </p>
                                 <span>
                                     <Link
                                         styles='text-xs lg:text-base'
                                         id='to-signup'
                                         path='/signin'
-                                        text='Connectez-vous'
+                                        text='Login'
                                         color='text-white'
                                     />
                                 </span>

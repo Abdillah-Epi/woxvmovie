@@ -1,23 +1,23 @@
-import React, { Suspense, useEffect } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import useAuth from "../../../hooks/useAuth";
-import { CleanAuthSelector } from "../../../store/auth";
-import { isClickedAtomFamily } from "../../../store/button";
+import React, { Suspense, useEffect } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import useAuth from '../../../hooks/useAuth';
+import { CleanAuthSelector } from '../../../store/auth';
+import { isClickedAtomFamily } from '../../../store/button';
 import {
     AddPlaylistSelector,
     FavoritesSelector,
     PlaylistsIDsSelector,
     RemovePlaylistSelector,
     ViewsSelector
-} from "../../../store/movies";
-import { UserAtom } from "../../../store/user";
-import MoviesLoaderTemplate from "../../molecules/MoviesLoaderTemplate";
-import TposLoaderTemplate from "../../molecules/TposLoaderTemplate";
-import Category from "../../organisms/Category";
-import QuickPlaylist from "../../organisms/QuickPlaylist";
-import Sidenav from "../../organisms/Sidenav";
-import Top from "../../organisms/Top";
-import navlinks from "../../molecules/Nav/links.json";
+} from '../../../store/movies';
+import { UserAtom } from '../../../store/user';
+import MoviesLoaderTemplate from '../../molecules/MoviesLoaderTemplate';
+import TposLoaderTemplate from '../../molecules/TposLoaderTemplate';
+import Category from '../../organisms/Category';
+import QuickPlaylist from '../../organisms/QuickPlaylist';
+import Sidenav from '../../organisms/Sidenav';
+import Top from '../../organisms/Top';
+import navlinks from '../../molecules/Nav/links.json';
 
 export const BackgroundFetching = () => {
     const [movies, setMovies] = useRecoilState(ViewsSelector);
@@ -69,14 +69,14 @@ export const Movies = () => {
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
                     key={1}
-                    infos={{ genre: user?.genres[0]!, path: "popular" }}
+                    infos={{ genre: user?.genres[0]!, path: 'popular' }}
                     title={`${user?.genres[0]} Movies`}
                 />
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
                     key={2}
-                    infos={{ genre: user?.genres[1]!, path: "popular" }}
+                    infos={{ genre: user?.genres[1]!, path: 'popular' }}
                     title={`${user?.genres[1]} Movies`}
                 />
             </Suspense>
@@ -86,14 +86,14 @@ export const Movies = () => {
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
                     key={3}
-                    infos={{ genre: user?.genres[2]!, path: "popular" }}
+                    infos={{ genre: user?.genres[2]!, path: 'popular' }}
                     title={`${user?.genres[2]} Movies`}
                 />
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
                     key={4}
-                    infos={{ genre: user?.genres[3]!, path: "popular" }}
+                    infos={{ genre: user?.genres[3]!, path: 'popular' }}
                     title={`${user?.genres[3]} Movies`}
                 />
             </Suspense>
@@ -109,14 +109,14 @@ export const TV = () => {
         <>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
-                    infos={{ genre: user?.genres[0]!, path: "popular/tv" }}
+                    infos={{ genre: user?.genres[0]!, path: 'popular/tv' }}
                     key={5}
                     title={`${user?.genres[0]} TV Shows`}
                 />
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
-                    infos={{ genre: user?.genres[1]!, path: "popular/tv" }}
+                    infos={{ genre: user?.genres[1]!, path: 'popular/tv' }}
                     key={6}
                     title={`${user?.genres[1]} TV Shows`}
                 />
@@ -126,14 +126,14 @@ export const TV = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
-                    infos={{ genre: user?.genres[2]!, path: "popular/tv" }}
+                    infos={{ genre: user?.genres[2]!, path: 'popular/tv' }}
                     key={7}
                     title={`${user?.genres[2]} TV Shows`}
                 />
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
-                    infos={{ genre: user?.genres[3]!, path: "popular/tv" }}
+                    infos={{ genre: user?.genres[3]!, path: 'popular/tv' }}
                     key={8}
                     title={`${user?.genres[3]} TV Shows`}
                 />
@@ -144,18 +144,18 @@ export const TV = () => {
 
 const THome: React.FC = ({ children }) => {
     const logout = useSetRecoilState(CleanAuthSelector);
-    const [isClicked, resetClick] = useRecoilState(isClickedAtomFamily("Déconexion"));
+    const [isClicked, resetClick] = useRecoilState(isClickedAtomFamily('Logout'));
 
     useEffect(() => {
         if (!isClicked) return;
         resetClick(() => false);
-        logout("");
+        logout('');
     }, [isClicked]);
     return (
         <div className='sticky w-screen bg-black'>
             {children}
             <div className='fixed top-0 w-[80%]'>
-                <Sidenav list={[...navlinks, { path: "/", text: "Déconexion" }]} />
+                <Sidenav list={[...navlinks, { path: '/', text: 'Logout' }]} />
             </div>
             <QuickPlaylist />
         </div>

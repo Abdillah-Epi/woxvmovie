@@ -1,36 +1,36 @@
-import React, { useEffect } from "react";
-import Cover from "../../atoms/Cover";
-import Nav from "../../molecules/Nav";
-import cover from "../../../assets/images/cover.webp";
-import Forms from "../../molecules/Forms";
-import { InputAtomFamily } from "../../../store/inputs";
-import { isClickedAtomFamily } from "../../../store/button";
-import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
-import useResetPasssword from "../../../hooks/useResetPasssword";
+import React, { useEffect } from 'react';
+import Cover from '../../atoms/Cover';
+import Nav from '../../molecules/Nav';
+import cover from '../../../assets/images/cover.webp';
+import Forms from '../../molecules/Forms';
+import { InputAtomFamily } from '../../../store/inputs';
+import { isClickedAtomFamily } from '../../../store/button';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import useResetPasssword from '../../../hooks/useResetPasssword';
 
 const FormsData = {
-    title: "Créez un nouveau mot de passe",
+    title: 'Create a new password',
     inputs: [
         {
-            placeHolder: "Nouveau mot de passe",
-            type: "password",
-            id: "password-new"
+            placeHolder: 'New password',
+            type: 'password',
+            id: 'password-new'
         },
         {
-            placeHolder: "Confirmer le mot de passe",
-            type: "password",
-            id: "password-confirm"
+            placeHolder: 'Confirm password',
+            type: 'password',
+            id: 'password-confirm'
         }
     ],
-    btn: "Valider"
+    btn: 'Validate'
 };
 
 const OResetPassword: React.FC = () => {
-    const [passNew, setPassNew] = useRecoilState(InputAtomFamily("password-new"));
-    const [passConf, setPassConf] = useRecoilState(InputAtomFamily("password-confirm"));
+    const [passNew, setPassNew] = useRecoilState(InputAtomFamily('password-new'));
+    const [passConf, setPassConf] = useRecoilState(InputAtomFamily('password-confirm'));
 
-    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily("Valider"));
+    const [isClicked, setClick] = useRecoilState(isClickedAtomFamily('Validate'));
 
     const { updatePassword } = useResetPasssword();
     const navigate = useNavigate();
@@ -38,17 +38,17 @@ const OResetPassword: React.FC = () => {
         if (!isClicked) return;
         setClick(() => false);
         if (passNew.value !== passConf.value) {
-            setPassConf(() => ({ value: "", error: `This password is not the same as the other one.` }));
+            setPassConf(() => ({ value: '', error: `This password is not the same as the other one.` }));
             return;
         }
         updatePassword(passNew.value).then(res => {
-            if (typeof res !== "number" && res.success) {
-                setPassNew(() => ({ value: "", error: "" }));
-                setPassConf(() => ({ value: "", error: "" }));
-                navigate("/signin");
+            if (typeof res !== 'number' && res.success) {
+                setPassNew(() => ({ value: '', error: '' }));
+                setPassConf(() => ({ value: '', error: '' }));
+                navigate('/signin');
             } else {
-                setPassNew(() => ({ value: "", error: "Fail to reset password." }));
-                setPassConf(() => ({ value: "", error: "Fail to reset password." }));
+                setPassNew(() => ({ value: '', error: 'Fail to reset password.' }));
+                setPassConf(() => ({ value: '', error: 'Fail to reset password.' }));
             }
         });
     }, [isClicked]);
