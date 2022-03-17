@@ -1,10 +1,10 @@
-import React, { Suspense, useEffect, useState } from "react";
-import THome, { Movies, TV } from "../../templates/Home";
-import Footer from "../../organisms/Footer";
-import BannerLoader from "../../molecules/BannerLoader";
-import { TopsTraindingAtom } from "../../../store/movies";
-import { useRecoilValue } from "recoil";
-import Banner from "../../organisms/Banner";
+import React, { Suspense, useEffect, useState } from 'react';
+import THome, { Movies, TV } from '../../templates/Home';
+import Footer from '../../organisms/Footer';
+import BannerLoader from '../../molecules/BannerLoader';
+import { TopsTraindingAtom } from '../../../store/movies';
+import { useRecoilValue } from 'recoil';
+import Banner from '../../organisms/Banner';
 
 const Home: React.FC = () => {
     //--------------------- GET RANDOM MOVIE FOR THE BANNER --------------------
@@ -18,7 +18,9 @@ const Home: React.FC = () => {
 
     return (
         <THome>
-            <Suspense fallback={<BannerLoader />}>{top.length >= index && <Banner movie={top[index]} />}</Suspense>
+            <Suspense fallback={<BannerLoader />}>
+                {top.length >= index && <Banner on='movie' movie={top[index]} />}
+            </Suspense>
             <Movies />
             <TV />
             <Footer />

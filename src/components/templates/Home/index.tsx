@@ -68,6 +68,7 @@ export const Movies = () => {
         <>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='movie'
                     key={1}
                     infos={{ genre: user?.genres[0]!, path: 'popular' }}
                     title={`${user?.genres[0]} Movies`}
@@ -75,6 +76,7 @@ export const Movies = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='movie'
                     key={2}
                     infos={{ genre: user?.genres[1]!, path: 'popular' }}
                     title={`${user?.genres[1]} Movies`}
@@ -85,6 +87,7 @@ export const Movies = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='movie'
                     key={3}
                     infos={{ genre: user?.genres[2]!, path: 'popular' }}
                     title={`${user?.genres[2]} Movies`}
@@ -92,6 +95,7 @@ export const Movies = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='movie'
                     key={4}
                     infos={{ genre: user?.genres[3]!, path: 'popular' }}
                     title={`${user?.genres[3]} Movies`}
@@ -109,6 +113,7 @@ export const TV = () => {
         <>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='tv'
                     infos={{ genre: user?.genres[0]!, path: 'popular/tv' }}
                     key={5}
                     title={`${user?.genres[0]} TV Shows`}
@@ -116,6 +121,7 @@ export const TV = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='tv'
                     infos={{ genre: user?.genres[1]!, path: 'popular/tv' }}
                     key={6}
                     title={`${user?.genres[1]} TV Shows`}
@@ -126,6 +132,7 @@ export const TV = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='tv'
                     infos={{ genre: user?.genres[2]!, path: 'popular/tv' }}
                     key={7}
                     title={`${user?.genres[2]} TV Shows`}
@@ -133,6 +140,7 @@ export const TV = () => {
             </Suspense>
             <Suspense fallback={<MoviesLoaderTemplate />}>
                 <Category
+                    on='tv'
                     infos={{ genre: user?.genres[3]!, path: 'popular/tv' }}
                     key={8}
                     title={`${user?.genres[3]} TV Shows`}

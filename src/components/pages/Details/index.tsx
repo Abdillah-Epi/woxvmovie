@@ -11,7 +11,7 @@ type DetailsProps = {};
 
 const Details: React.FC<DetailsProps> = () => {
     const selectedMovie = useRecoilValue(movieSelectedAtom);
-    const setView = useSetRecoilState(ViewsAtomFamily(selectedMovie ? selectedMovie.id : -1));
+    const setView = useSetRecoilState(ViewsAtomFamily(selectedMovie ? selectedMovie.movie.id : -1));
     const setMovie = useSetRecoilState(ViewsAtom);
 
     const navigate = useNavigate();
@@ -19,11 +19,11 @@ const Details: React.FC<DetailsProps> = () => {
 
     useEffect(() => {
         if (!selectedMovie) return;
-        addToViews(selectedMovie).then(res => {
+        addToViews(selectedMovie.movie).then(res => {
             if (typeof res === 'number') return;
             if (!res.success) return;
             setView(() => true);
-            setMovie(c => [...c, selectedMovie]);
+            setMovie(c => [...c, selectedMovie.movie]);
         });
     }, []);
 
@@ -35,7 +35,7 @@ const Details: React.FC<DetailsProps> = () => {
     return (
         <TDetails>
             <Suspense fallback={<BannerLoader />}>
-                <Banner movie={selectedMovie} reactions={true} />
+                <Banner on={selectedMovie.on} movie={selectedMovie.movie} reactions={true} />
             </Suspense>
         </TDetails>
     );

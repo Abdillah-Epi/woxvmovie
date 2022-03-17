@@ -25,6 +25,7 @@ import { TVMovie } from '../../../store/types';
 type PosterInfosProps = {
     movie: TVMovie;
     title: string;
+    on: string;
 };
 
 type LikeProps = {
@@ -66,7 +67,7 @@ export const Playlist: React.FC<PlaylistProps> = ({ movie }) => {
     return <img onClick={() => onClick()} className='h-7 w-7 cursor-pointer' src={params.id ? inpl : addpl} alt='' />;
 };
 
-const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie }) => {
+const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie, on }) => {
     const selectedID = useRecoilValue(movieHoveredAtom);
     const selectMovie = useSetRecoilState(movieSelectedAtom);
     const navigate = useNavigate();
@@ -91,7 +92,7 @@ const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie }) => {
                         <Like movie={movie} />
                         <img
                             onClick={() => {
-                                selectMovie(() => movie);
+                                selectMovie(() => ({ movie, on }));
                                 navigate('/details');
                             }}
                             className={`h-6 w-6 cursor-pointer fill-amber-500`}
@@ -109,7 +110,7 @@ const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie }) => {
                             <Like movie={movie} />
                             <img
                                 onClick={() => {
-                                    selectMovie(() => movie);
+                                    selectMovie(() => ({ movie, on }));
                                     navigate('/details');
                                 }}
                                 className={`h-6 w-6 cursor-pointer fill-amber-500`}

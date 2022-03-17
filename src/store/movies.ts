@@ -29,7 +29,7 @@ export const movieHoveredAtom = atom<string | null>({
     default: null
 });
 
-export const movieSelectedAtom = atom<TVMovie | null>({
+export const movieSelectedAtom = atom<{ movie: TVMovie; on: string } | null>({
     key: 'movieSelectedAtom',
     default: null
 });
@@ -141,10 +141,10 @@ export const TopsTraindingSelectorFamily = selectorFamily<TVMovie[] | null | num
         }
 });
 
-export const VideoSelector = selectorFamily<Videos | null | number, number>({
+export const VideoSelector = selectorFamily<Videos | null | number, { id: number; on: string }>({
     key: 'VideoSelector',
     get:
-        (id: number) =>
+        ({ id, on }) =>
         async ({ get }) => {
             const oauth_token = get(OAuthAtom);
             const access_token = get(AccessTokenAtom);
@@ -155,7 +155,7 @@ export const VideoSelector = selectorFamily<Videos | null | number, number>({
 
             const url = process.env.VITE_API_URL as string;
 
-            let response: Response = await fetch(`${url}/v1/api/app/video/${id}`, {
+            let response: Response = await fetch(`${url}/v1/api/app/video/${id}/${on}`, {
                 headers: {
                     Authorization: `Bearer ${oauth_token}`,
                     jwtToken: `Bearer ${access_token}`

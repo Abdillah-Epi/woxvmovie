@@ -14,10 +14,11 @@ import { variantsBanner } from './motion';
 type BannerProps = {
     reactions?: boolean;
     movie: TVMovie;
+    on: string;
 };
 
-const Banner: React.FC<BannerProps> = ({ movie, reactions = false }) => {
-    const video = useRecoilValue(VideoSelector(movie ? movie.id : 438695));
+const Banner: React.FC<BannerProps> = ({ movie, reactions = false, on }) => {
+    const video = useRecoilValue(VideoSelector({ id: movie ? movie.id : 438695, on: on }));
     const { setOAuth, setAccessToken } = useAuth();
 
     useEffect(() => {
@@ -38,7 +39,12 @@ const Banner: React.FC<BannerProps> = ({ movie, reactions = false }) => {
                 {video && video.results.key !== '' ? (
                     <Player id={video.results.key!} />
                 ) : (
-                    <Poster styles='aspect-video' url={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+                    <div className='flex h-full items-center justify-center'>
+                        <Poster
+                            styles='w-[30%] aspect-9/16'
+                            url={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        />
+                    </div>
                 )}
             </motion.div>
             <div className='absolute top-0 h-full w-full space-y-40 bg-black/30 p-10 xl:space-y-72'>
