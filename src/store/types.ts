@@ -1,4 +1,4 @@
-import { ErrorResponse } from "../error";
+import { ErrorResponse } from '../error';
 
 export type Video = {
     iso_639_1: string;
@@ -34,6 +34,7 @@ export type TVMovie = {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    on?: string;
 };
 
 export type Category = {

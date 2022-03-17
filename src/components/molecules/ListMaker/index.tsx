@@ -1,18 +1,19 @@
-import React, { Suspense } from "react";
-import { useSetRecoilState } from "recoil";
-import { movieHoveredAtom } from "../../../store/movies";
-import { TVMovie } from "../../../store/types";
-import { AnimatePresence, motion } from "framer-motion";
-import Poster from "../../atoms/Poster";
-import PosterInfos from "../PosterInfos";
-import { LikeWatcher } from "../../organisms/Category";
+import React, { Suspense } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { movieHoveredAtom } from '../../../store/movies';
+import { TVMovie } from '../../../store/types';
+import { AnimatePresence, motion } from 'framer-motion';
+import Poster from '../../atoms/Poster';
+import PosterInfos from '../PosterInfos';
+import { LikeWatcher } from '../../organisms/Category';
 
 type ListMakerProps = {
     movies: TVMovie[];
     show?: boolean;
+    on?: string;
 };
 
-const ListMaker: React.FC<ListMakerProps> = ({ movies, show = false }) => {
+const ListMaker: React.FC<ListMakerProps> = ({ movies, show = false, on }) => {
     const selectMovie = useSetRecoilState(movieHoveredAtom);
 
     return (
@@ -30,13 +31,13 @@ const ListMaker: React.FC<ListMakerProps> = ({ movies, show = false }) => {
                             className={`relative w-full`}
                         >
                             <Suspense fallback={<div></div>}>
-                                <LikeWatcher movie={m} />
+                                <LikeWatcher on={m.on!} movie={m} />
                             </Suspense>
                             <Poster
                                 styles='rounded-lg w-full aspect-9/16'
                                 url={`https://image.tmdb.org/t/p/w500${m.poster_path}`}
                             />
-                            <PosterInfos title={"1"} movie={m} />
+                            <PosterInfos on={m.on ? m.on : on!} title={'1'} movie={m} />
                         </motion.div>
                     );
                 })}

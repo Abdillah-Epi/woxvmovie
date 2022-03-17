@@ -1,20 +1,21 @@
-import { ErrorResponse } from "../error";
-import { TVMovie } from "../store/types";
-import useAuth from "./useAuth";
+import { ErrorResponse } from '../error';
+import { TVMovie } from '../store/types';
+import useAuth from './useAuth';
 
 const useViews = () => {
     const { setAccessToken, accessToken, oauth, setOAuth } = useAuth();
 
-    const addToViews = async (movies: TVMovie) => {
+    const addToViews = async (movies: TVMovie, on: string) => {
         let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/views/add`, {
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 jwtToken: `Bearer ${accessToken}`,
                 Authorization: `Bearer ${oauth}`
             },
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify({
-                movies
+                movies,
+                on
             })
         });
         if (res.status === 403) {

@@ -287,10 +287,13 @@ export const FavoritesSelector = selector<TVMovie[] | null | number>({
     }
 });
 
-export const FavoritesSelectorFamily = selectorFamily<TVMovie[] | null | number, { id: number; movie: TVMovie }>({
+export const FavoritesSelectorFamily = selectorFamily<
+    TVMovie[] | null | number,
+    { id: number; movie: TVMovie; on: string }
+>({
     key: 'FavoritesSelectorFamily',
     get:
-        ({ id, movie }) =>
+        ({ id, movie, on }) =>
         async ({ get }) => {
             const oauth_token = get(OAuthAtom);
             const access_token = get(AccessTokenAtom);
@@ -302,7 +305,7 @@ export const FavoritesSelectorFamily = selectorFamily<TVMovie[] | null | number,
                 if (list.length < 1) return null;
             }
 
-            const payload = action === 'like' ? { movie: movie } : { mid: id };
+            const payload = action === 'like' ? { movie: movie, on } : { mid: id };
             const url = process.env.VITE_API_URL as string;
 
             let response: Response = await fetch(`${url}/v1/api/app/${action}`, {
@@ -340,9 +343,9 @@ export const PlaylistsMoviesAtomFamily = atomFamily<TVMovie[], string>({
     default: []
 });
 
-export const OpenPlaylistMenuAtom = atom<{ state: boolean; id: number }>({
+export const OpenPlaylistMenuAtom = atom<{ state: boolean; id: number; on: string }>({
     key: 'OpenPlaylistMenuAtom',
-    default: { state: false, id: -1 }
+    default: { state: false, id: -1, on: 'none' }
 });
 
 export const PlaylistsIDsSelector = selector<PlaylistsIDs[] | null | number>({
@@ -425,7 +428,10 @@ export const PlaylistsSelectorFamily = selectorFamily<TVMovie[] | null | number,
         }
 });
 
-type PlaylistSelected = { movie: TVMovie; id: string; state: true } | { id: string; mid: number; state: false } | null;
+type PlaylistSelected =
+    | { movie: TVMovie; id: string; on: string; state: true }
+    | { id: string; mid: number; state: false }
+    | null;
 export const PlaylistSelectedAtom = atom<PlaylistSelected>({
     key: 'PlaylistSelectedAtom',
     default: null
@@ -449,7 +455,8 @@ export const AddPlaylistSelector = selector<{ movies: TVMovie[]; id: string } | 
             },
             method: 'PUT',
             body: JSON.stringify({
-                movies: data.movie
+                movies: data.movie,
+                on: data.on
             })
         });
         if (response.status === 403 || response.status === 401) {

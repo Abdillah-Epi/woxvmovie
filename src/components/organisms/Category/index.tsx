@@ -25,9 +25,10 @@ type CategoryProps = {
 
 type LikeWatcherProps = {
     movie: TVMovie;
+    on: string;
 };
 
-export const LikeWatcher: React.VFC<LikeWatcherProps> = ({ movie }) => {
+export const LikeWatcher: React.VFC<LikeWatcherProps> = ({ movie, on }) => {
     const { setOAuth, setAccessToken } = useAuth();
 
     //make a family of movie to simplify playlist trigger
@@ -37,7 +38,7 @@ export const LikeWatcher: React.VFC<LikeWatcherProps> = ({ movie }) => {
     }, []);
 
     const [click, setClick] = useRecoilState(LikeActionAtomFamily(movie.id));
-    const movies = useRecoilValue(FavoritesSelectorFamily({ id: movie.id, movie }));
+    const movies = useRecoilValue(FavoritesSelectorFamily({ id: movie.id, movie, on }));
 
     const setStateFav = useSetRecoilState(FavoritesAtomFamily(movie.id));
     const updateFavoritesList = useSetRecoilState(FavoritesAtom);
@@ -121,7 +122,7 @@ const Category: React.FC<CategoryProps> = ({ infos, title, on }) => {
                                     } relative`}
                                 >
                                     <Suspense fallback={<div></div>}>
-                                        <LikeWatcher movie={m} />
+                                        <LikeWatcher on={on} movie={m} />
                                     </Suspense>
                                     <Poster
                                         styles='rounded-lg aspect-9/16'

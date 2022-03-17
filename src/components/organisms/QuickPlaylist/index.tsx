@@ -15,8 +15,8 @@ const QuickPlaylist: React.FC<QuickPlaylistProps> = ({}) => {
     const movie = useRecoilValue(MoviesAtomFamily(state.id));
     const onClick = (id: string) => {
         if (!movie || !id) return;
-        selectPlaylist(() => ({ movie, id, state: true }));
-        setState(() => ({ id: -1, state: false }));
+        selectPlaylist(() => ({ movie, id, state: true, on: state.on }));
+        setState(() => ({ id: -1, state: false, on: 'none' }));
     };
     return (
         <>
@@ -24,7 +24,7 @@ const QuickPlaylist: React.FC<QuickPlaylistProps> = ({}) => {
                 <div className='fixed  inset-0 flex h-full w-full flex-col items-center justify-center bg-black/80'>
                     <div className='flex w-full justify-end py-5 pr-10'>
                         <img
-                            onClick={() => setState(() => ({ id: -1, state: false }))}
+                            onClick={() => setState(() => ({ id: -1, state: false, on: 'none' }))}
                             className='h-4 w-4 cursor-pointer lg:h-8 lg:w-8'
                             src={close}
                             alt=''

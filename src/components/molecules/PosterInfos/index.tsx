@@ -48,9 +48,10 @@ export const Like: React.FC<LikeProps> = ({ movie }) => {
 
 type PlaylistProps = {
     movie: TVMovie;
+    on: string;
 };
 
-export const Playlist: React.FC<PlaylistProps> = ({ movie }) => {
+export const Playlist: React.FC<PlaylistProps> = ({ movie, on }) => {
     const setActive = useSetRecoilState(OpenPlaylistMenuAtom);
     const selectPlaylist = useSetRecoilState(PlaylistSelectedAtom);
 
@@ -58,7 +59,7 @@ export const Playlist: React.FC<PlaylistProps> = ({ movie }) => {
 
     const onClick = () => {
         if (!params.id) {
-            setActive(c => ({ state: !c.state, id: movie.id }));
+            setActive(c => ({ state: !c.state, id: movie.id, on: on }));
         } else {
             let id = params.id;
             selectPlaylist(() => ({ id: id, mid: movie.id, state: false }));
@@ -99,7 +100,7 @@ const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie, on }) => {
                             src={isViewed ? eye_blue : eye}
                             alt=''
                         />
-                        <Playlist movie={movie} />
+                        <Playlist on={on} movie={movie} />
                     </div>
                 </div>
             )}
@@ -117,7 +118,7 @@ const PosterInfos: React.FC<PosterInfosProps> = ({ title, movie, on }) => {
                                 src={isViewed ? eye_blue : eye}
                                 alt=''
                             />
-                            <Playlist movie={movie} />
+                            <Playlist on={on} movie={movie} />
                         </div>
                     </div>
                 </div>

@@ -19,11 +19,11 @@ const Details: React.FC<DetailsProps> = () => {
 
     useEffect(() => {
         if (!selectedMovie) return;
-        addToViews(selectedMovie.movie).then(res => {
+        addToViews(selectedMovie.movie, selectedMovie.on).then(res => {
             if (typeof res === 'number') return;
             if (!res.success) return;
             setView(() => true);
-            setMovie(c => [...c, selectedMovie.movie]);
+            setMovie(c => [...c, { ...selectedMovie.movie, on: selectedMovie.on }]);
         });
     }, []);
 

@@ -21,11 +21,11 @@ const Actions = () => {
     return (
         <>
             <Suspense fallback={<div></div>}>
-                <LikeWatcher movie={selectedMovie!} />
+                <LikeWatcher on={selectedMovie?.on!} movie={selectedMovie?.movie!} />
             </Suspense>
             <div className='flex w-[80%] items-center space-x-6'>
-                <Like movie={selectedMovie!} />
-                <Playlist movie={selectedMovie!} />
+                <Like movie={selectedMovie?.movie!} />
+                <Playlist on={selectedMovie?.on!} movie={selectedMovie?.movie!} />
             </div>
         </>
     );
