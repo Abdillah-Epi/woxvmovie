@@ -1,6 +1,6 @@
 <div align="center">
 	<br>
-	<a href="https://woxv.ddns.net">
+	<a href="https://woxvmovie.woxv.org/">
 		<img src="woxvmovie_banner.svg" width="800" height="400" alt="Click to see the source">
 	</a>
 	<br>
