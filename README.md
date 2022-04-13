@@ -9,7 +9,7 @@
 	<br/>
 
 # What is it ?
-<a href="https://woxv.ddns.net">WOXVMOVIE</a> is a mini a platform like <a href="https://netflix.com/">Netflix</a>.
+<a href="https://woxvmovie.woxv.org/">WOXVMOVIE</a> is a mini a platform like <a href="https://netflix.com/">Netflix</a>.
 
 
 # This is a list of what you can do in the website 🚀
