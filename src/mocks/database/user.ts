@@ -1,6 +1,4 @@
 import { TVMovie } from '../../store/types';
-import { v4 as uuid } from 'uuid';
-import { p } from 'msw/lib/glossary-36cf4e2d';
 
 export type UserAuth = {
     email: string;
@@ -10,7 +8,7 @@ export type UserAuth = {
 };
 
 export const CurrentUser: UserAuth = {
-    email: 'abdillah2504@gmail.com',
+    email: 'woxv@gmail.com',
     genres: ['Comedy', 'Animation', 'Crime', 'Action'],
     id: '50b04f77-0c5e-48c3-a68e-67542c6d38d4',
     password: '123456'
@@ -18,7 +16,7 @@ export const CurrentUser: UserAuth = {
 
 export const usersDB: UserAuth[] = [
     {
-        email: 'abdillah2504@gmail.com',
+        email: 'woxv@gmail.com',
         genres: ['Comedy', 'Animation', 'Crime', 'Action'],
         id: '50b04f77-0c5e-48c3-a68e-67542c6d38d4',
         password: '123456'

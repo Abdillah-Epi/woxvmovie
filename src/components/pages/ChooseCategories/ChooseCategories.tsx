@@ -1,10 +1,19 @@
+import { useNavigate } from '@tanstack/react-location';
+import { s } from 'msw/lib/glossary-36cf4e2d';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { LocationGenerics } from '../../../router';
+import { routeStatusAtom } from '../../../store/auth';
 import Typography from '../../atoms/Typography';
 import CategoriesBackdrop from '../../organisms/CategoriesBackdrop';
 import CategoriesPoster from '../../organisms/CategoriesPoster';
 import ChooseCategoriesTemplate from '../../templates/ChooseCategories';
 
 const ChooseCategories: React.FC = () => {
+    const navigate = useNavigate<LocationGenerics>();
+    const status = useRecoilValue(routeStatusAtom);
+
+    if (status !== 'success') navigate({ to: '/landing' });
     return (
         <ChooseCategoriesTemplate>
             <div className='space-y-10 xl:h-[38%]'>
