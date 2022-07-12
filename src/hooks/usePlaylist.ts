@@ -1,103 +1,34 @@
+import { useCallback, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { ErrorResponse } from '../error';
-import { PlaylistsResponse, TVMovie } from '../store/types';
-import useAuth from './useAuth';
+import { PlaylistsAtom } from '../store/playlist';
+import usePlaylistQueries from './usePlaylistQueries';
 
+//
 const usePlaylist = () => {
-    const { setAccessToken, accessToken, oauth, setOAuth } = useAuth();
+    const { createPlaylist, deletePlaylist } = usePlaylistQueries();
+    const [name, setName] = useState('');
+    const updatePlaylist = useSetRecoilState(PlaylistsAtom);
+    const [error, setError] = useState<ErrorResponse>();
 
-    const createPlaylist = async (name: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/playlist`, {
-            headers: {
-                'Content-Type': 'application/json',
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                name
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: { success: true; playlists: string } | ErrorResponse) => {
-            return r;
-        });
-    };
+    const Create = useCallback(async () => {
+        setError(() => undefined);
+        const res = await createPlaylist(name);
+        if (!res) return;
+        if (!res.success) return setError(() => res);
+        setName(() => '');
+        updatePlaylist(c => [...c, { id: res.id, name: name }]);
+    }, [name]);
 
-    const deletePlaylist = async (id: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/playlist/${id}`, {
-            headers: {
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'DELETE'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: { success: true } | ErrorResponse) => {
-            return r;
-        });
-    };
+    const Delete = useCallback(async (id: string) => {
+        setError(() => undefined);
+        const res = await deletePlaylist(id);
+        if (!res) return;
+        if (!res.success) return setError(() => res);
+        updatePlaylist(c => c.filter(p => p.id !== id));
+    }, []);
 
-    const addInPlaylist = async (id: string, movies: TVMovie) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/playlists/add/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                movies
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: { success: true; id: string } | ErrorResponse) => {
-            return r;
-        });
-    };
-
-    const getPlaylistMoveByID = async (id: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/playlists/movies/${id}`, {
-            headers: {
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'GET'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: PlaylistsResponse) => {
-            return r;
-        });
-    };
-
-    return { createPlaylist, deletePlaylist, addInPlaylist, getPlaylistMoveByID, setOAuth, setAccessToken };
+    return { name, setName, Create, Delete, error };
 };
 
 export default usePlaylist;

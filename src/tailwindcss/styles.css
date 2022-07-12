@@ -1,0 +1,13 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@font-face {
+    font-family: 'BebasNeue';
+    src: local('BebasNeue'), url('./font/BebasNeue.otf') format('otf');
+}
+
+@import "tailwindcss/utilities";
+
+.select-genres {
+    @apply md:h-10 h-8 pl-5 md:w-auto md:pr-10 text-xs md:text-lg text-gray-600 bg-white border border-gray-300 rounded-full appearance-none hover:border-gray-400 focus:outline-none
+}

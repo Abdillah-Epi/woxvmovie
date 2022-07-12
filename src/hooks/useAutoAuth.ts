@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { ErrorResponse } from "../error";
-import { AccessTokenAtom, RefreshSelector, RefreshTokenAtom, routeStatusAtom } from "../store/auth";
-import { UserAtom, UserSelector } from "../store/user";
-import useAuthorization from "./useAuthorization";
+import { useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ErrorAccess, ErrorResponse } from '../error';
+import { AccessTokenAtom, RefreshSelector, RefreshTokenAtom, routeStatusAtom } from '../store/auth';
+import { UserAtom, UserSelector } from '../store/user';
+import useAuthorization from './useAuthorization';
 
 export interface SignupParams {
     email: string;
@@ -19,7 +19,7 @@ export interface AuthSuccess {
 export type AuthResponse = AuthSuccess | ErrorResponse | 403;
 
 const useAutoAuth = () => {
-    const { setOAuth } = useAuthorization();
+    const { setOAuth, token } = useAuthorization();
     const setAccessToken = useSetRecoilState(AccessTokenAtom);
     const setRefreshToken = useSetRecoilState(RefreshTokenAtom);
     const setUser = useSetRecoilState(UserAtom);
@@ -29,29 +29,20 @@ const useAutoAuth = () => {
     const userData = useRecoilValue(UserSelector);
 
     useEffect(() => {
-        if (typeof userData === "number") {
-            setOAuth(() => null);
-            setStatus(() => "public");
-            return;
-        }
-        if (!userData) {
-            setStatus(() => "public");
-            return;
-        }
-        if (!userData.success) {
-            setAccessToken(() => null);
-            setRefreshToken(() => null);
-            setUser(() => null);
-            setStatus(() => "public");
-            return;
-        }
+        setStatus(() => 'public');
+        if (userData === ErrorAccess.FORBIDDEN) return;
+        if (userData === ErrorAccess.UNAUTHORIZED) return;
+
         setUser(userData);
-        setStatus(() => "success");
-    }, [userData]);
+        setStatus(() => 'success');
+    }, [userData, token]);
 
     useEffect(() => {
-        if (!newToken || newToken == 403 || !newToken.success) return;
-        setAccessToken(newToken.access_token);
+        if (newToken === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (newToken === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+        if (newToken === ErrorAccess.REFRESH_TOKEN_EXPIRE) return setAccessToken(() => null);
+        if (!newToken || !newToken.success) return setAccessToken(() => null);
+
         setRefreshToken(newToken.refresh_token);
     }, [newToken]);
 

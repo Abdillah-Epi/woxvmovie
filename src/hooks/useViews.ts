@@ -1,36 +1,21 @@
-import { ErrorResponse } from '../error';
-import { TVMovie } from '../store/types';
-import useAuth from './useAuth';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { ErrorAccess } from '../error';
+import { ViewsAtom, ViewsSelector } from '../store/views';
 
 const useViews = () => {
-    const { setAccessToken, accessToken, oauth, setOAuth } = useAuth();
+    const data = useRecoilValue(ViewsSelector);
+    const [views, setViews] = useRecoilState(ViewsAtom);
 
-    const addToViews = async (movies: TVMovie, on: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/views/add`, {
-            headers: {
-                'Content-Type': 'application/json',
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'PUT',
-            body: JSON.stringify({
-                movies,
-                on
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: { success: true; id: number } | ErrorResponse) => {
-            return r;
-        });
-    };
-    return { addToViews, setOAuth, setAccessToken };
+    useEffect(() => {
+        if (data === ErrorAccess.FORBIDDEN) return setViews(() => []);
+        if (data === ErrorAccess.UNAUTHORIZED) return setViews(() => []);
+        if (!data.success) return setViews(() => []);
+
+        setViews(() => data.movies);
+    }, [data]);
+
+    return [views] as const;
 };
 
 export default useViews;

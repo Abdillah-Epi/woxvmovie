@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-const useDebounced = (q: string) => {
-    const [qDebounce, setQdebounced] = useState(q);
+const useDebounced = () => {
+    const [q, setQ] = useState('');
 
     useEffect(() => {
         let id = setTimeout(() => {
-            setQdebounced(() => q);
+            setQ(() => q);
         }, 1000);
 
         return () => clearTimeout(id);
     }, [q]);
 
-    return { qDebounce, setQdebounced };
+    return [q, setQ] as const;
 };
 
 export default useDebounced;

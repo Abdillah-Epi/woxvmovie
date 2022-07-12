@@ -1,51 +1,37 @@
-import { useRecoilValue } from "recoil";
-import { categoriesSelectedAtom } from "../store/movies";
-import useAuth from "./useAuth";
+import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ErrorAccess, ErrorResponse } from '../error';
+import { UpdateUserGenres } from '../requests/movies';
+import { categoriesSelectedAtom } from '../store/categories';
+import { UserAtom } from '../store/user';
+import useCredentials from './useCredentials';
 
 const useMovie = () => {
-    const { setUser, accessToken, oauth, setOAuth, setAccessToken } = useAuth();
+    const { accessToken, oauth, setOAuth, setAccessToken } = useCredentials();
+    const setUser = useSetRecoilState(UserAtom);
     const selected = useRecoilValue(categoriesSelectedAtom);
+    const [error, setError] = useState<ErrorResponse>();
 
     const updateUserGenres = async () => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/genres`, {
-            headers: {
-                "Content-Type": "application/json",
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: "PUT",
-            body: JSON.stringify({
-                genres: selected.map(m =>
-                    m.name === "Action & Adventure" ? "Action" : m.name === "Fantasy & Sci-Fi" ? "Fantasy" : m.name
-                )
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
-        return await res.json().then((r: { success: boolean }) => {
-            if (res) {
-                setUser(
-                    c =>
-                        c && {
-                            ...c,
-                            genres: selected.map(m =>
-                                m.name === "Action & Adventure"
-                                    ? "Action"
-                                    : m.name === "Fantasy & Sci-Fi"
-                                    ? "Fantasy"
-                                    : m.name
-                            )
-                        }
-                );
-            }
-            return r;
-        });
+        setError(() => undefined);
+        if (!oauth) return;
+        if (!selected || !selected.length) return;
+        if (!accessToken) return;
+
+        const res = await UpdateUserGenres(oauth, accessToken, selected);
+
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (res === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+        if (!res.success) return setError(() => res);
+
+        setUser(c => ({
+            ...c!,
+            genres: selected.map(m =>
+                m.name === 'Action & Adventure' ? 'Action' : m.name === 'Fantasy & Sci-Fi' ? 'Fantasy' : m.name
+            )
+        }));
+
+        return res;
     };
 
     return { updateUserGenres, setOAuth, setAccessToken };

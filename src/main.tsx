@@ -1,19 +1,26 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
-import "./tailwindcss/output.css";
-import App from "./App";
-import { RecoilRoot } from "recoil";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './tailwindcss/output.css';
+import App from './App';
+import { RecoilRoot } from 'recoil';
+import { location, routes } from './router';
+import { Router } from '@tanstack/react-location';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <RecoilRoot>
-            {/* <Suspense fallback={<div>Loading...</div>}> */}
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-            {/* </Suspense> */}
-        </RecoilRoot>
-    </React.StrictMode>,
-    document.getElementById("root")
-);
+(async () => {
+    const isInDevelopmentMode = process.env.MODE === 'dev';
+
+    if (isInDevelopmentMode) {
+        const { default: worker } = await import('./mocks');
+        await worker.start();
+    }
+    ReactDOM.render(
+        <React.StrictMode>
+            <RecoilRoot>
+                <Router {...{ location, routes }}>
+                    <App />
+                </Router>
+            </RecoilRoot>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+})();

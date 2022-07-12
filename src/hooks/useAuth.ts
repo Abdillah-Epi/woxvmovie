@@ -1,196 +1,116 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { ErrorResponse } from '../error';
-import { AccessTokenAtom, CleanAuthSelector, RefreshTokenAtom, routeStatusAtom } from '../store/auth';
-import { OAuthAtom } from '../store/authorization';
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { ErrorAccess, ErrorResponse } from '../error';
+import {
+    DeleteAccount,
+    GetAccess,
+    Logout,
+    SignIn,
+    SignInWithGoogle,
+    SignUp,
+    SignupParams,
+    SignupWithGoogle
+} from '../requests/auth';
+import { CleanAuthSelector, routeStatusAtom } from '../store/auth';
 import { UserAtom } from '../store/user';
-
-export interface SignupParams {
-    email: string;
-    password: string;
-}
-
-export interface AuthSuccess {
-    access_token: string;
-    refresh_token: string;
-    success: true;
-}
-
-export type AuthResponse = AuthSuccess | ErrorResponse | 403;
+import useCredentials from './useCredentials';
 
 const useAuth = () => {
-    const [oauth, setOAuth] = useRecoilState(OAuthAtom);
-    const [accessToken, setAccessToken] = useRecoilState(AccessTokenAtom);
-    const [refreshToken, setRefreshToken] = useRecoilState(RefreshTokenAtom);
-    const [user, setUser] = useRecoilState(UserAtom);
+    const { accessToken, oauth, setAccessToken, setOAuth, setRefreshToken } = useCredentials();
+    const setUser = useSetRecoilState(UserAtom);
+    const [error, setError] = useState<ErrorResponse>();
 
     const signup = async (payload: SignupParams) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/signup`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                ...payload
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        return await res.json().then((r: AuthResponse) => {
-            if (r !== 403 && r.success) {
-                setAccessToken(r.access_token);
-                setRefreshToken(r.refresh_token);
-            }
-            return r;
-        });
+        setError(() => undefined);
+        if (!oauth) return;
+        const res = await SignUp(payload, oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (!res.success) return setError(() => res);
+        setAccessToken(() => res.access_token);
+        setRefreshToken(() => res.refresh_token);
+        return { success: true };
     };
 
-    const signupWithGoogle = async () => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/signup/google`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`,
-                'Access-Control-Allow-Origin': '*'
-            },
-            method: 'GET',
-            redirect: 'follow'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        return await res.json().then((r: { success: boolean; url: string }) => {
-            window.location.href = r.url;
-            return;
-        });
+    const signUpWithGoogle = async () => {
+        setError(() => undefined);
+        if (!oauth) return;
+        const res = await SignupWithGoogle(oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        return { success: true };
     };
 
-    const signinWithGoogle = async () => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/signin/google`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`,
-                'Access-Control-Allow-Origin': '*'
-            },
-            method: 'GET',
-            redirect: 'follow'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        return await res.json().then((r: { success: boolean; url: string }) => {
-            window.location.href = r.url;
-            return;
-        });
+    const signInWithGoogle = async () => {
+        setError(() => undefined);
+        if (!oauth) return;
+        const res = await SignInWithGoogle(oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        return { success: true };
     };
 
-    const GetAccess = async (token: string, type: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/${type}/access/${token}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'GET'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        return await res.json().then((r: AuthResponse) => {
-            if (r !== 403 && r.success) {
-                setAccessToken(r.access_token);
-                setRefreshToken(r.refresh_token);
-            }
-            return r;
-        });
+    const getAccess = async (token: string, type: 'signup' | 'signin') => {
+        setError(() => undefined);
+
+        if (!oauth) return;
+
+        const res = await GetAccess(token, type, oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+
+        if (!res.success) return setError(() => res);
+        setAccessToken(res.access_token);
+        setRefreshToken(res.refresh_token);
+        return { success: true };
     };
 
     const signin = async (email: string, password: string) => {
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/signin`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        return await res.json().then((r: AuthResponse) => {
-            if (r !== 403 && r.success) {
-                setAccessToken(r.access_token);
-                setRefreshToken(r.refresh_token);
-            }
-            return r;
-        });
+        setError(() => undefined);
+
+        if (!oauth) return;
+        const res = await SignIn(email, password, oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (!res.success) return setError(() => res);
+        setAccessToken(res.access_token);
+        setRefreshToken(res.refresh_token);
+        return { success: true };
     };
 
     const cleanAuthSession = useSetRecoilState(CleanAuthSelector);
     const setStatus = useSetRecoilState(routeStatusAtom);
     const logout = async () => {
+        setError(() => undefined);
+
+        if (!oauth) return;
+        if (!accessToken) return;
         cleanAuthSession('');
         setStatus(() => 'public');
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/logout`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'POST'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
+        const res = await Logout(accessToken, oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (res === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+        return { success: true };
     };
 
     const deleteAccount = async () => {
+        setError(() => undefined);
+
+        if (!oauth) return;
+        if (!accessToken) return;
         cleanAuthSession('');
         setStatus(() => 'public');
-        let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/accout`, {
-            headers: {
-                'Content-Type': 'application/json',
-                jwtToken: `Bearer ${accessToken}`,
-                Authorization: `Bearer ${oauth}`
-            },
-            method: 'DELETE'
-        });
-        if (res.status === 403) {
-            setOAuth(() => null);
-            return 403;
-        }
-        if (res.status === 401) {
-            setAccessToken(() => null);
-            return 401;
-        }
+        const res = await DeleteAccount(accessToken, oauth);
+        if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+        if (res === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+        return { success: true };
     };
 
     return {
-        user,
         deleteAccount,
-        signupWithGoogle,
-        signinWithGoogle,
-        GetAccess,
+        signUpWithGoogle,
+        signInWithGoogle,
+        getAccess,
         signup,
         signin,
         logout,
         setUser,
-        setAccessToken,
-        accessToken,
-        oauth,
-        refreshToken,
-        setOAuth
+        error
     };
 };
 

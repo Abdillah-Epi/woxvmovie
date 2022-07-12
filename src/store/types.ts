@@ -17,7 +17,7 @@ export type Videos = {
     id: number;
     results: Video;
 };
-export type VideosResponse = { video: Videos | null; success: true } | ErrorResponse;
+export type VideosResponse = { video: Videos; success: true } | ErrorResponse;
 
 export type TVMovie = {
     adult: boolean;
@@ -39,19 +39,22 @@ export type TVMovie = {
 
 export type Category = {
     category: string;
-    movies: TVMovie[] | null;
+    movies: TVMovie[];
 };
 
 export type ListTVMovies = {
     data: Category[];
 };
-export type TVMovieResponse = { movies: TVMovie[] | null; success: true } | ErrorResponse;
-export type ViewsResponse = { movies: TVMovie[] | null; success: true } | ErrorResponse;
+export type TVMovieResponse = { movies: TVMovie[]; success: true } | ErrorResponse;
+export type ViewsResponse = {
+    success: true;
+    movies: TVMovie[];
+};
+export type FavoritesResponse = TVMovieResponse;
 
-export type PlaylistsIDs = {
+export type PlaylistsName = {
     id: string;
     name: string;
 };
-export type PlaylistsIDsResponse = { playlists: PlaylistsIDs[] | null; success: true } | ErrorResponse;
-export type PlaylistsResponse = { movies: TVMovie[] | null; success: true } | ErrorResponse;
+export type PlaylistsResponse = TVMovieResponse;
 export type ActionPlaylistsResponse = { data: { movies: TVMovie[]; id: string }; success: true } | ErrorResponse;

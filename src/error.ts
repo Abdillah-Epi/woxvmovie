@@ -7,3 +7,9 @@ export interface ErrorResponse {
 export interface Error {
     [key: string]: string;
 }
+
+export enum ErrorAccess {
+    FORBIDDEN = 'forbidden',
+    UNAUTHORIZED = 'unauthorized',
+    REFRESH_TOKEN_EXPIRE = 'expire'
+}

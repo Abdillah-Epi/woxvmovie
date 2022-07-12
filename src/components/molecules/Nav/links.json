@@ -8,25 +8,25 @@
     {
         "text": "Favorites",
         "color": "text-white",
-        "path": "/favorites",
+        "path": "/app/favorites",
         "styles": "font-light"
     },
     {
         "text": "Views",
         "color": "text-white",
-        "path": "/views",
+        "path": "/app/views",
         "styles": "font-light"
     },
     {
         "text": "Playlists",
         "color": "text-white",
-        "path": "/playlist",
+        "path": "/app/playlist/landing",
         "styles": "font-light"
     },
     {
         "text": "Search",
         "color": "text-white",
-        "path": "/search",
+        "path": "/app/search",
         "styles": "font-light"
     }
 ]
