@@ -1,6 +1,6 @@
 <div align="center">
 	<br>
-	<a href="https://woxvflix.woxv.org/">
+	<a href="https://woxvflix.app.woxv.org/">
 		<img src="woxvmovie_banner.svg" width="800" height="400" alt="Click to see the source">
 	</a>
 	<br>
@@ -10,7 +10,7 @@
 
 # What is it ?
 
-<a href="https://woxvmovie.woxv.org/">WOXVFLIX</a> is a mini a platform like <a href="https://netflix.com/">Netflix</a>.
+<a href="https://woxvflix.app.woxv.org/">WOXVFLIX</a> is a mini a platform like <a href="https://netflix.com/">Netflix</a>.
 
 # This is a list of what you can do in the website 🚀
 
