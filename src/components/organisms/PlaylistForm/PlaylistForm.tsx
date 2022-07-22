@@ -11,7 +11,7 @@ import { ContainerAnimation, ItemContainerAnimation, SlideAnimation } from './mo
 
 const PlaylistForm: React.FC = () => {
     const playlist = useRecoilValue(PlaylistsAtom);
-    const { name, setName, Create, Delete, error } = usePlaylist();
+    const { name, setName, Create, Delete } = usePlaylist();
 
     const navigate = useNavigate<LocationGenerics>();
 

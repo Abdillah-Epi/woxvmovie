@@ -3,9 +3,9 @@ import React from 'react';
 import { TitleAnimation } from './motion';
 import { LocationGenerics } from '../../../router';
 import { useNavigate } from '@tanstack/react-location';
-import Typography from '../../atoms/Typography';
 import NavLinks from './NavLinks';
 import LoggedNav from './LoggedNav';
+import logo from '../../../assets/images/full-logo.svg';
 
 type NavProps = {
     links?: {
@@ -20,16 +20,19 @@ const Nav: React.FC<NavProps> = ({ links }) => {
     const navigate = useNavigate<LocationGenerics>();
 
     return (
-        <div className='flex w-full items-center justify-between'>
+        <div className='flex h-[10%] w-full items-center justify-between'>
             <LoggedNav>
                 <NavLinks links={links}>
                     <TitleAnimation>
-                        <Typography
-                            onClick={() => navigate({ to: '/landing' })}
-                            theme='title'
-                            title={'WOXVMOVIE'}
-                            className={'cursor-pointer text-3xl text-woxvmovie-3 sm:text-6xl xl:text-6xl '}
-                        />
+                        <div className='pl-8 sm:p-8'>
+                            <img
+                                onClick={() => navigate({ to: '/app' })}
+                                src={logo}
+                                className={'w-40 cursor-pointer sm:w-[200px]'}
+                                width={200}
+                                height={200}
+                            />
+                        </div>
                     </TitleAnimation>
                 </NavLinks>
             </LoggedNav>

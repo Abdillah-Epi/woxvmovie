@@ -17,7 +17,26 @@ export type Videos = {
     id: number;
     results: Video;
 };
-export type VideosResponse = { video: Videos; success: true } | ErrorResponse;
+
+export type TVMovieCached = {
+    movie: {
+        adult: boolean;
+        backdrop_path: string;
+        genre_ids: number[];
+        id: number;
+        original_language: string;
+        original_title: string;
+        overview: string;
+        popularity: number;
+        poster_path: string;
+        release_date: string;
+        title: string;
+        video: boolean;
+        vote_average: number;
+        vote_count: number;
+    };
+    on: string;
+};
 
 export type TVMovie = {
     adult: boolean;
@@ -37,24 +56,13 @@ export type TVMovie = {
     on?: string;
 };
 
-export type Category = {
-    category: string;
-    movies: TVMovie[];
-};
+export type VideosResponse = { video: Videos; success: true } | ErrorResponse;
+export type TVMovieResponse = { movies: TVMovie[] | null; success: true } | ErrorResponse;
+export type ViewsResponse = { movies: TVMovieCached[]; success: true } | ErrorResponse;
+export type PlaylistMoviesResponse = { movies: TVMovieCached[]; success: true } | ErrorResponse;
+export type IsMovieLikedResponse = { liked: boolean; success: true } | ErrorResponse;
+export type FavoritesResponse = { movies: TVMovieCached[] | null; success: true } | ErrorResponse;
+export type PlaylistsName = { id: string; name: string };
+export type PlaylistsResponse = { success: true; playlists: { id: string; name: string }[] } | ErrorResponse;
 
-export type ListTVMovies = {
-    data: Category[];
-};
-export type TVMovieResponse = { movies: TVMovie[]; success: true } | ErrorResponse;
-export type ViewsResponse = {
-    success: true;
-    movies: TVMovie[];
-};
-export type FavoritesResponse = TVMovieResponse;
-
-export type PlaylistsName = {
-    id: string;
-    name: string;
-};
-export type PlaylistsResponse = TVMovieResponse;
-export type ActionPlaylistsResponse = { data: { movies: TVMovie[]; id: string }; success: true } | ErrorResponse;
+export type Success = { success: true };

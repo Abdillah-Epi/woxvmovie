@@ -17,11 +17,9 @@ const App = () => {
 
     return (
         <>
-            {status === 'fetch' && (
-                <Suspense fallback={<div></div>}>
-                    <AuthWatcher />
-                </Suspense>
-            )}
+            <Suspense fallback={<div></div>}>
+                <AuthWatcher />
+            </Suspense>
 
             {status !== 'fetch' && (
                 <AnimatePresence exitBeforeEnter initial={false}>

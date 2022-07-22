@@ -1,32 +1,33 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { ErrorAccess } from '../error';
+import { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { ErrorAccess, ErrorResponse } from '../error';
 import { ToggleLike } from '../requests/likes';
-import { FavoritesAtom, FavoritesAtomFamily } from '../store/linkes';
+import { FavoritesAtomFamily, FavoritesSelectorFamily } from '../store/linkes';
 import { TVMovie } from '../store/types';
 import useCredentials from './useCredentials';
 
-export type LikeAction = { action: 'unlike' | 'like'; movie: TVMovie };
-const useLikeAction = () => {
-    const [like, setLike] = useState<LikeAction>();
-    const [likes, updateLocalLikes] = useRecoilState(FavoritesAtom);
+const useLikeAction = (id: number, movie: TVMovie, on: string) => {
     const { accessToken, oauth, setOAuth, setAccessToken } = useCredentials();
-    const toggleLikeStatus = useSetRecoilState(FavoritesAtomFamily(like ? like.movie.id : -1));
 
-    useEffect(() => {
-        if (!like) return;
-        if (like.action === 'unlike' && !likes.length) return;
+    const [error, setError] = useState<ErrorResponse>();
+
+    // consult the state of the like by websocket
+    useRecoilValue(FavoritesSelectorFamily(id));
+    const [isLiked, toggleLikeStatus] = useRecoilState(FavoritesAtomFamily(id));
+
+    const LikeCallback = async () => {
         if (!accessToken || !oauth) return;
 
-        ToggleLike(like.movie, like.action, accessToken, oauth).then(res => {
+        ToggleLike(movie, accessToken, oauth).then(res => {
             if (res === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
             if (res === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
-            toggleLikeStatus(status => !status);
-            res.success && updateLocalLikes(() => res.movies);
-        });
-    }, [like]);
+            if (!res.success) return setError(() => res);
 
-    return [setLike] as const;
+            toggleLikeStatus(() => res.liked);
+        });
+    };
+
+    return [isLiked, LikeCallback, error] as const;
 };
 
 export default useLikeAction;

@@ -1,8 +1,12 @@
 import useViews from '../../../hooks/useViews';
 import view from '../../../assets/images/views.svg';
 import ListMaker from '../../organisms/ListMaker';
+import useRouteStatus from '../../../hooks/useRouteStatus';
 
 const Views = () => {
+    // Check if the user is logged
+    useRouteStatus();
+
     const [views] = useViews();
 
     return (

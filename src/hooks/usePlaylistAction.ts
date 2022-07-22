@@ -2,7 +2,7 @@ import { useMatch } from '@tanstack/react-location';
 import { useSetRecoilState } from 'recoil';
 import { LocationGenerics } from '../router';
 import { movieSelectedAtom } from '../store/movies';
-import { PlaylistModalAtom } from '../store/playlist';
+import { PlaylistModalAtom, PlaylistsAtom } from '../store/playlist';
 import { TVMovie } from '../store/types';
 import usePlaylistQueries from './usePlaylistQueries';
 

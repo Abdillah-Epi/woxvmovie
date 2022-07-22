@@ -1,6 +1,5 @@
 import Typography from '../../atoms/Typography';
 import FooterLinks from '../../molecules/FooterLinks';
-import drop from '../../../assets/images/drop.svg';
 
 const Footer = () => {
     return (
@@ -9,7 +8,7 @@ const Footer = () => {
                 <Typography title='Any questions? Contact us' />
                 <FooterLinks />
                 <div className='w-[40%] sm:w-[30%] xl:w-[10%]'></div>
-                <Typography title='Woxvmovie France' />
+                <Typography title='WOXVFLIX France' />
             </div>
         </div>
     );

@@ -19,8 +19,9 @@ const Validator = (email: string, password: string) => {
 
 export const useSignUp = (email: string, password: string) => {
     const navigate = useNavigate<LocationGenerics>();
-    const setStatus = useSetRecoilState(routeStatusAtom);
+
     const { signup, error } = useAuth();
+    const setStatus = useSetRecoilState(routeStatusAtom);
     const [errorMessage, setErrorMessage] = useState<SignUpFromValidator>({ email: '', password: '' });
 
     const signUpCallback = async () => {
@@ -28,7 +29,7 @@ export const useSignUp = (email: string, password: string) => {
         const res = await signup({ email, password });
         if (!res) return;
         if (res.success) {
-            setStatus(() => 'success');
+            setStatus(() => 'genres');
             navigate({ to: '/app/genres' });
             return;
         }

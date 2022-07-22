@@ -1,6 +1,0 @@
-FROM node:16.14.0-alpine
-WORKDIR /usr/src/app
-COPY package.* yarn.* ./
-RUN yarn
-COPY . ./
-RUN yarn dev --host

@@ -26,7 +26,6 @@ export const UserSelector = selector({
         if (!access_token) return ErrorAccess.UNAUTHORIZED;
 
         const res = await GetUser(access_token, oauth_token);
-
         return res;
     },
     set: ({ set }) => {

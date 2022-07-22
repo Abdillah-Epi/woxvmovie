@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: "BebasNeue";
-    src: local("BebasNeue"), url("../assets/fonts/BebasNeue.otf") format("otf");
-}
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -19,4 +15,5 @@ html {
 body {
     overflow: scroll;
     scrollbar-width: none;
+    font-family: 'Nunito', sans-serif;
 }

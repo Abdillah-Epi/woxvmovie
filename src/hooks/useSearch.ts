@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { ErrorAccess, ErrorResponse } from '../error';
 import { Search } from '../requests/search';
-import { TVMovie } from '../store/types';
+import { TVMovieCached } from '../store/types';
 import useCredentials from './useCredentials';
 
 const useSearch = (q: string) => {
     const { setAccessToken, accessToken, oauth, setOAuth } = useCredentials();
-    const [movies, setMovies] = useState<TVMovie[]>([]);
+    const [movies, setMovies] = useState<TVMovieCached[]>([]);
     const [error, setError] = useState<ErrorResponse>();
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const useSearch = (q: string) => {
         if (res === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
         if (!res.success) return setError(res);
 
-        setMovies(() => res.movies);
+        setMovies(() => res.movies.map(m => ({ movie: m, on: 'movie' })));
     };
 
     return [movies, error] as const;

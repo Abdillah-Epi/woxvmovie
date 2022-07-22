@@ -20,7 +20,7 @@ export const GetViewMovies = async (access_token: string, oauth_token: string) =
     });
 };
 
-export const AddToViewsList = async (movies: TVMovie, on: string, access_token: string, oauth_token: string) => {
+export const AddToViewsList = async (movie: TVMovie, access_token: string, oauth_token: string) => {
     const res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/views/add`, {
         headers: {
             'Content-Type': 'application/json',
@@ -29,8 +29,7 @@ export const AddToViewsList = async (movies: TVMovie, on: string, access_token: 
         },
         method: 'PUT',
         body: JSON.stringify({
-            movies,
-            on
+            id: movie.id
         })
     });
 

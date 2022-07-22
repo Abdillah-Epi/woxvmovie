@@ -1,9 +1,9 @@
-import { atom, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 import { ErrorAccess } from '../error';
-import { GetPlaylistMoveByID } from '../requests/playlists';
+import { GetPlaylistMoveByID, GetPlaylists } from '../requests/playlists';
 import { AccessTokenAtom } from './auth';
 import { OAuthAtom } from './authorization';
-import { PlaylistsName, PlaylistsResponse } from './types';
+import { PlaylistsName, PlaylistMoviesResponse } from './types';
 
 export const PlaylistsAtom = atom<PlaylistsName[]>({
     key: 'PlaylistsAtom',
@@ -16,7 +16,7 @@ export const PlaylistModalAtom = atom<boolean>({
 });
 
 export const PlaylistSelectorFamily = selectorFamily<
-    ErrorAccess.FORBIDDEN | PlaylistsResponse | ErrorAccess.UNAUTHORIZED,
+    ErrorAccess.FORBIDDEN | PlaylistMoviesResponse | ErrorAccess.UNAUTHORIZED,
     string
 >({
     key: 'PlaylistSelectorFamily',
@@ -32,4 +32,18 @@ export const PlaylistSelectorFamily = selectorFamily<
             const res = await GetPlaylistMoveByID(id, access_token, oauth_token);
             return res;
         }
+});
+
+export const PlaylistSelector = selector({
+    key: 'PlaylistSelector',
+    get: async ({ get }) => {
+        const oauth_token = get(OAuthAtom);
+        const access_token = get(AccessTokenAtom);
+
+        if (!oauth_token) return ErrorAccess.FORBIDDEN;
+        if (!access_token) return ErrorAccess.UNAUTHORIZED;
+
+        const res = await GetPlaylists(access_token, oauth_token);
+        return res;
+    }
 });

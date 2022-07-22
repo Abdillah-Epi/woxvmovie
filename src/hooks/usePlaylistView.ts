@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { ErrorAccess, ErrorResponse } from '../error';
 import { LocationGenerics } from '../router';
 import { PlaylistSelectorFamily } from '../store/playlist';
-import { TVMovie } from '../store/types';
+import { TVMovie, TVMovieCached } from '../store/types';
 import useCredentials from './useCredentials';
 
 const usePlaylistView = () => {
@@ -12,7 +12,7 @@ const usePlaylistView = () => {
     const data = useRecoilValue(PlaylistSelectorFamily(params.id));
     const { setAccessToken, setOAuth } = useCredentials();
     const [error, setError] = useState<ErrorResponse>();
-    const [list, setList] = useState<TVMovie[]>([]);
+    const [list, setList] = useState<TVMovieCached[]>([]);
 
     useEffect(() => {
         setError(() => undefined);
@@ -20,8 +20,9 @@ const usePlaylistView = () => {
         if (data === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
         if (data === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
         if (!data.success) return setError(() => data);
+        if (!data.movies) return;
 
-        setList(() => data.movies);
+        setList(() => data.movies!);
     }, [data]);
 
     return [list, error] as const;

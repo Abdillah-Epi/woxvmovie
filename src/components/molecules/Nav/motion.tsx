@@ -64,7 +64,7 @@ export const variantLinks = {
     }
 };
 
-type NavItemAnimationProps = {
+type NavItemAnimationProps = React.HTMLAttributes<HTMLDivElement> & {
     myKey: number;
 };
 

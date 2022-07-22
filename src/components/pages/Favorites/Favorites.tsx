@@ -1,9 +1,13 @@
-import useFavorites from '../../../hooks/useFavorites';
 import fav from '../../../assets/images/favorites.svg';
+import useFavorites from '../../../hooks/useFavorites';
+import useRouteStatus from '../../../hooks/useRouteStatus';
 import ListMaker from '../../organisms/ListMaker';
 
 const Favorites = () => {
-    const [favorites] = useFavorites();
+    // Check if the user is logged
+    useRouteStatus();
+
+    const [favorites, error] = useFavorites();
 
     return (
         <div className='flex flex-col items-start justify-center space-y-6 '>

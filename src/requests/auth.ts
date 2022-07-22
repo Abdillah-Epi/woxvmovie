@@ -103,10 +103,11 @@ export const SignIn = async (email: string, password: string, oauth_token: strin
 
 // TODO: implement access_token
 export const Logout = async (access_token: string, oauth_token: string) => {
-    let res = await fetch(`${process.env.VITE_API_URL}/v1/api/logout`, {
+    let res = await fetch(`${process.env.VITE_API_URL}/v1/api/app/logout`, {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${oauth_token}`
+            Authorization: `Bearer ${oauth_token}`,
+            jwtToken: `Bearer ${access_token}`
         },
         method: 'POST'
     });

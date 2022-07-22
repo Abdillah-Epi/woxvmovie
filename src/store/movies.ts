@@ -39,8 +39,8 @@ export const MoviesSelectorFamily = selectorFamily<
 
             if (!oauth_token) return ErrorAccess.FORBIDDEN;
             if (!access_token) return ErrorAccess.UNAUTHORIZED;
-            const res = await getTVMovie(genre, oauth_token, access_token, path);
 
+            const res = await getTVMovie(genre, oauth_token, access_token, path);
             return res;
         }
 });

@@ -15,7 +15,7 @@ const CategoriesBackdrop: React.FC = () => {
         <motion.div
             className={`flex flex-col space-y-10 ${
                 selected.length <= 1 ? 'justify-start' : 'justify-center'
-            } h-full w-full items-center bg-black`}
+            } h-full w-full items-center bg-[#141414]`}
         >
             <motion.div layout className={`grid h-1/2 w-full grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-4`}>
                 <AnimatePresence presenceAffectsLayout>
@@ -26,7 +26,7 @@ const CategoriesBackdrop: React.FC = () => {
                 </AnimatePresence>
             </motion.div>
             {selected.length === 4 && (
-                <div className='flex w-[20%] justify-center'>
+                <div className='flex w-[50%] justify-center sm:w-[20%]'>
                     <Button onClick={() => updateUserGenresCallback()} title='Validate' theme='primary' />
                 </div>
             )}

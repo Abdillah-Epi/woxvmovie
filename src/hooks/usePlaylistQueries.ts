@@ -38,10 +38,10 @@ const usePlaylistQueries = () => {
         res === ErrorAccess.FORBIDDEN && setOAuth(() => null);
         res === ErrorAccess.UNAUTHORIZED && setAccessToken(() => null);
     };
-    const addInPlaylist = async (id: string, movie: TVMovie, on: string) => {
+    const addInPlaylist = async (id: string, movie: TVMovie) => {
         if (!accessToken) return null;
         if (!oauth) return null;
-        const res = await AddInPlaylist({ id, movie, access_token: accessToken, oauth_token: oauth, on });
+        const res = await AddInPlaylist({ id, movie, access_token: accessToken, oauth_token: oauth });
         res === ErrorAccess.FORBIDDEN && setOAuth(() => null);
         res === ErrorAccess.UNAUTHORIZED && setAccessToken(() => null);
     };

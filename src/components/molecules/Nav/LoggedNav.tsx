@@ -9,42 +9,35 @@ import Hamburger from '../../atoms/Hamburger';
 import Typography from '../../atoms/Typography';
 import { LoggedNavAnimation } from './motion';
 
-const LoggedNav: React.FC = ({ children }) => {
+type LoggedNavProps = React.HTMLAttributes<HTMLDivElement>;
+
+const LoggedNav: React.FC<LoggedNavProps> = ({ children }) => {
     const status = useRecoilValue(routeStatusAtom);
     const navigate = useNavigate<LocationGenerics>();
     const { logout, deleteAccount } = useAuth();
 
     const DeleteAccount = () => {
         deleteAccount();
-        navigate({ to: '/landing' });
     };
 
     const Logout = () => {
         logout();
-        navigate({ to: '/landing' });
     };
 
     return (
         <>
             {children}
             <LoggedNavAnimation className='h-7 w-[10%]'>
-                {status === 'public' ? (
-                    <Button
-                        onClick={() => navigate({ to: '/signin' })}
-                        theme='primary'
-                        title={'Connectez-vous'}
-                        className={'rounded-lg'}
-                    />
-                ) : (
-                    <div className='flex space-x-5'>
+                {status !== 'public' && (
+                    <div className='hidden xl:flex space-x-5'>
                         <Typography
                             onClick={() => Logout()}
-                            title={'Déconnexion'}
+                            title={'Logout'}
                             className='cursor-pointer font-light text-white'
                         />
                         <Typography
                             onClick={() => DeleteAccount()}
-                            title={'Supprimer'}
+                            title={'Delete'}
                             className='cursor-pointer font-bold text-red-500'
                         />
                     </div>

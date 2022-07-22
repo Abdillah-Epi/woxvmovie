@@ -1,6 +1,8 @@
+import { useNavigate } from '@tanstack/react-location';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ErrorAccess, ErrorResponse } from '../error';
+import { LocationGenerics } from '../router';
 import { AccessTokenAtom, RefreshSelector, RefreshTokenAtom, routeStatusAtom } from '../store/auth';
 import { UserAtom, UserSelector } from '../store/user';
 import useAuthorization from './useAuthorization';
@@ -25,8 +27,9 @@ const useAutoAuth = () => {
     const setUser = useSetRecoilState(UserAtom);
     const setStatus = useSetRecoilState(routeStatusAtom);
 
-    const newToken = useRecoilValue(RefreshSelector);
+    //const newToken = useRecoilValue(RefreshSelector);
     const userData = useRecoilValue(UserSelector);
+    const navigate = useNavigate<LocationGenerics>();
 
     useEffect(() => {
         setStatus(() => 'public');
@@ -34,17 +37,22 @@ const useAutoAuth = () => {
         if (userData === ErrorAccess.UNAUTHORIZED) return;
 
         setUser(userData);
+        if (userData.genres.length === 0) {
+            setStatus(() => 'genres');
+            navigate({ to: '/app/genres' });
+            return;
+        }
         setStatus(() => 'success');
     }, [userData, token]);
 
-    useEffect(() => {
-        if (newToken === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
-        if (newToken === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
-        if (newToken === ErrorAccess.REFRESH_TOKEN_EXPIRE) return setAccessToken(() => null);
-        if (!newToken || !newToken.success) return setAccessToken(() => null);
+    // useEffect(() => {
+    //     if (newToken === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
+    //     if (newToken === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+    //     if (newToken === ErrorAccess.REFRESH_TOKEN_EXPIRE) return setAccessToken(() => null);
+    //     if (!newToken || !newToken.success) return setAccessToken(() => null);
 
-        setRefreshToken(newToken.refresh_token);
-    }, [newToken]);
+    //     setRefreshToken(newToken.refresh_token);
+    // }, [newToken]);
 
     return { setUser, setAccessToken, setOAuth };
 };

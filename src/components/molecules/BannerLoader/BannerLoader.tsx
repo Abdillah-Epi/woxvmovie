@@ -1,13 +1,15 @@
-import { motion } from "framer-motion";
+import logo from '../../../assets/images/full-logo.svg';
 
 const BannerLoader = () => {
     return (
         <div className='h-screen w-screen p-10'>
-            <motion.div
-                animate={{ opacity: [0.17, 0.87, 0.17] }}
-                transition={{ repeat: Infinity, duration: 4 }}
-                className='h-full w-full rounded-lg bg-slate-600/80'
-            />
+            <div className="h-full w-full flex justify-center items-center">
+                <img                
+                    src={logo} 
+                    width={400} 
+                    height={400} 
+                />
+            </div>
         </div>
     );
 };

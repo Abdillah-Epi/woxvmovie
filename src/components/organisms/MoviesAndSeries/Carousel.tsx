@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import useLikeAction from '../../../hooks/useLikeAction';
 import useMoviesAndSeries from '../../../hooks/useMoviesAndSeries';
 import usePlaylistAction from '../../../hooks/usePlaylistAction';
-import { movieHoveredAtom } from '../../../store/movies';
 import Display from '../../atoms/Display';
 import Typography from '../../atoms/Typography';
 import PosterActions from '../../molecules/PosterActions';
@@ -18,21 +15,18 @@ type CarouselProps = {
 };
 
 const Carousel: React.FC<CarouselProps> = ({ genre, path, title, on, theme = 'poster' }) => {
-    const [pointerEvent, setPointer] = useState<boolean>(false);
-
-    const [list, error] = useMoviesAndSeries(genre, path);
-
-    const [setLike] = useLikeAction();
+    const [pointerEvent, setPointer] = useState<boolean>(() => false);
     const [OpenModal] = usePlaylistAction();
 
-    // TODO ERROR return
+    const [list] = useMoviesAndSeries(genre, path);
 
     return (
-        <div className='my-16 space-y-16'>
+        <div className='space-y-16'>
             <div className='px-10'>
                 <Typography className='text-xl text-white sm:text-5xl' title={title} />
             </div>
             <MotionDragContainer setPointer={setPointer} className='h-full w-full cursor-grab overflow-hidden '>
+                {!list.length && <div className='h-[568.88px] w-[320px]'></div>}
                 {list.map((m, key) => {
                     return (
                         <SharedElements
@@ -46,13 +40,7 @@ const Carousel: React.FC<CarouselProps> = ({ genre, path, title, on, theme = 'po
                                 className={`${theme === 'poster' && 'aspect-9/16'} rounded-lg`}
                                 path={theme === 'poster' ? m.poster_path : m.backdrop_path}
                             />
-                            <PosterActions
-                                PlaylistCallback={OpenModal}
-                                LikeCallback={setLike}
-                                on={on}
-                                title={title}
-                                movie={m}
-                            />
+                            <PosterActions PlaylistCallback={OpenModal} on={on} title={title} movie={m} />
                         </SharedElements>
                     );
                 })}

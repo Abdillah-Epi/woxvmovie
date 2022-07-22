@@ -1,8 +1,12 @@
 import usePlaylistView from '../../../hooks/usePlaylistView';
 import img_movie from '../../../assets/images/movie.svg';
 import ListMaker from '../../organisms/ListMaker';
+import useRouteStatus from '../../../hooks/useRouteStatus';
 
 const PlaylistView = () => {
+    // Check if the user is logged
+    useRouteStatus();
+
     const [list, error] = usePlaylistView();
 
     return (

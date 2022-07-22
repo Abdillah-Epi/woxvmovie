@@ -9,7 +9,7 @@ const ResetPasswordForm: React.FC = () => {
     const [passNew, setPassNew] = useState('');
     const [passConf, setPassConf] = useState('');
 
-    const [signUpCallback, errorMessage] = useResetPassword(passNew, passConf);
+    const [signUpCallback] = useResetPassword(passNew, passConf);
 
     return (
         <div className='flex h-full w-full items-center justify-center'>

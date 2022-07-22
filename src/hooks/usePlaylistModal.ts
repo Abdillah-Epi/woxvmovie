@@ -12,7 +12,7 @@ const usePlaylistModal = () => {
 
     const AddInPlaylist = (id: string) => {
         if (!movie || !id) return;
-        addInPlaylist(id, movie.movie, movie.on);
+        addInPlaylist(id, movie.movie);
         setState(() => false);
     };
 

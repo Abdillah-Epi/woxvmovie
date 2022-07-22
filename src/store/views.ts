@@ -4,9 +4,9 @@ import { GetViewMovies } from '../requests/views';
 import { AccessTokenAtom } from './auth';
 import { OAuthAtom } from './authorization';
 import { movieSelectedAtom } from './movies';
-import { TVMovie } from './types';
+import { TVMovieCached } from './types';
 
-export const ViewsAtom = atom<TVMovie[]>({
+export const ViewsAtom = atom<TVMovieCached[]>({
     key: 'ViewsAtom',
     default: []
 });

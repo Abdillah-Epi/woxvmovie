@@ -13,7 +13,6 @@ import Search from '../components/pages/Search';
 import Signin from '../components/pages/Signin';
 import Signup from '../components/pages/Signup';
 import Details from '../components/pages/Details';
-import Landing from '../components/pages/Landing';
 import Playlist from '../components/pages/Playlist';
 import Favorites from '../components/pages/Favorites';
 import SendRequest from '../components/pages/SendRequest';
@@ -35,7 +34,6 @@ export type LocationGenerics = MakeGenerics<{
 export const location = new ReactLocation<LocationGenerics>();
 
 export const routes: Route<LocationGenerics>[] = [
-    { path: 'landing', element: <Landing />, id: 'landing' },
     { path: 'signin', element: <Signin />, id: 'signin' },
     { path: 'signup', element: <Signup /> },
     { path: 'password_update', children: [{ path: ':token', element: <ResetPassword /> }] },
@@ -57,7 +55,14 @@ export const routes: Route<LocationGenerics>[] = [
                 )
             },
             { path: 'genres', element: <ChooseCategories /> },
-            { path: 'details', element: <Details /> },
+            {
+                path: 'details',
+                element: (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Details />
+                    </Suspense>
+                )
+            },
             {
                 path: 'views',
                 element: (
@@ -82,10 +87,12 @@ export const routes: Route<LocationGenerics>[] = [
                 path: 'playlist',
                 children: [
                     {
-                        path: '/landing',
+                        path: '/',
                         element: (
                             <DisplayPlaylistsTemplate>
-                                <Playlist />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <Playlist />
+                                </Suspense>
                             </DisplayPlaylistsTemplate>
                         )
                     },
@@ -111,5 +118,5 @@ export const routes: Route<LocationGenerics>[] = [
             }
         ]
     },
-    { path: '/', element: <Landing />, id: 'landing' }
+    { path: '/', element: <Signin />, id: 'signin' }
 ];

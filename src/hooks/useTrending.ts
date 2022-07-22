@@ -17,9 +17,10 @@ const useTrending = (path: 'trainding' | 'top/tv') => {
     useEffect(() => {
         if (data === ErrorAccess.FORBIDDEN) return setOAuth(() => null);
         if (data === ErrorAccess.UNAUTHORIZED) return setAccessToken(() => null);
+        if (!data.success) return setError(() => data);
+        if (!data.movies) return;
 
-        data.success && setList(() => data.movies);
-        !data.success && setError(() => data);
+        setList(() => data.movies!);
     }, [data]);
 
     return [trending, error] as const;

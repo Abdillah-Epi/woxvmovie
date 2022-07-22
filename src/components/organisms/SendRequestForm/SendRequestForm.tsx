@@ -6,7 +6,7 @@ import useSendRequest from '../../../hooks/useSendRequest';
 
 const SendRequestForm: React.FC = () => {
     const [email, setEmail] = useState('');
-    const [active, sendRequestCallback, errorMessage] = useSendRequest(email);
+    const [active, sendRequestCallback] = useSendRequest(email);
 
     return (
         <div className='flex h-full w-full items-center justify-center'>

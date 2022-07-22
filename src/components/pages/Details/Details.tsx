@@ -1,34 +1,32 @@
-import { useNavigate } from '@tanstack/react-location';
-import React, { Suspense, useEffect } from 'react';
+import { Navigate } from '@tanstack/react-location';
+import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
+import useBannerVideo from '../../../hooks/useBannerVideo';
+import useRouteStatus from '../../../hooks/useRouteStatus';
 import useViewsQueries from '../../../hooks/useViewsQueries';
-import { LocationGenerics } from '../../../router';
 import { movieSelectedAtom } from '../../../store/movies';
-import BannerLoader from '../../molecules/BannerLoader';
 import Banner from '../../organisms/Banner';
 
 type DetailsProps = {};
 
 const Details: React.FC<DetailsProps> = () => {
+    // Check if the user is logged
+    useRouteStatus();
+
     const selectedMovie = useRecoilValue(movieSelectedAtom);
-    const navigate = useNavigate<LocationGenerics>();
     const [addToViews, error] = useViewsQueries();
 
     useEffect(() => {
         if (!selectedMovie) return;
-        addToViews(selectedMovie.movie, selectedMovie.on);
+        addToViews(selectedMovie.movie);
     }, []);
 
-    if (!selectedMovie) {
-        navigate({ to: '/app' });
-        return <div></div>;
-    }
+    const [video, err] = useBannerVideo(null, 'movie');
 
+    if (!selectedMovie) return <Navigate to={'/app'} />;
     return (
         <div>
-            <Suspense fallback={<BannerLoader />}>
-                <Banner on={selectedMovie.on} movie={selectedMovie.movie} />
-            </Suspense>
+            <Banner video={video} movie={selectedMovie!.movie} />
         </div>
     );
 };

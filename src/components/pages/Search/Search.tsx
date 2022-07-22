@@ -1,9 +1,13 @@
 import useDebounced from '../../../hooks/useDebounced';
+import useRouteStatus from '../../../hooks/useRouteStatus';
 import useSearch from '../../../hooks/useSearch';
 import SearchInput from '../../molecules/SearchInput';
 import ListMaker from '../../organisms/ListMaker';
 
 const Search = () => {
+    // Check if the user is logged
+    useRouteStatus();
+
     const [q, setQ] = useDebounced();
     const [movies, error] = useSearch(q);
 

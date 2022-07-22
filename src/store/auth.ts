@@ -5,7 +5,7 @@ import { getOAuthSelector, OAuthAtom } from './authorization';
 import { cleanMovieSelector } from './movies';
 import { UserSelector } from './user';
 
-export const routeStatusAtom = atom<'public' | 'success' | 'fetch'>({
+export const routeStatusAtom = atom<'public' | 'success' | 'fetch' | 'genres'>({
     key: 'routeStatusAtom',
     default: 'fetch'
 });

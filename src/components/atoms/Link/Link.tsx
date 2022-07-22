@@ -1,6 +1,5 @@
 import { Link as ReactLocationLink } from '@tanstack/react-location';
 import React from 'react';
-import Typography from '../Typography';
 
 type LinkProps = React.HTMLAttributes<HTMLAnchorElement> & {
     text?: string;
@@ -17,11 +16,11 @@ const Link: React.FC<LinkProps> = ({ text, to, className, iconPrefix, iconSuffix
             className={`flex cursor-pointer items-center space-x-3 ${className}`}
         >
             {iconPrefix && (
-                <span className={`h-4 w-4`}>
+                <span className={`h-4 w-4 mr-2`}>
                     <img src={iconPrefix} alt='' />
                 </span>
             )}
-            <Typography>{children ?? text}</Typography>
+            {children ?? text}
             {iconSuffix && (
                 <span className={`h-4 w-4`}>
                     <img src={iconSuffix} alt='' />

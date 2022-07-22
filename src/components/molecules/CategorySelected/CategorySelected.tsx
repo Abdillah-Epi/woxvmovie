@@ -29,14 +29,14 @@ const CategorySelected: React.FC<RemoveCategoryProps> = ({ category }) => {
             className='relative h-full w-full cursor-pointer'
         >
             <motion.div className='aspect-video w-full'>
-                <Display theme='backdrop' className='rounded-md brightness-50' path={category.backdrop} />
+                <Display theme='backdrop' className='rounded-md w-full brightness-50' path={category.backdrop} />
             </motion.div>
             <motion.div
                 layoutId={`t-${category.name}`}
                 onClick={Remove}
                 className='absolute inset-0 flex aspect-video w-full items-center justify-center'
             >
-                <Typography title={category.name} className='text-white ' />
+                <Typography title={category.name} className='text-white text-2xl' />
             </motion.div>
         </motion.div>
     );

@@ -1,17 +1,31 @@
 import { ErrorAccess, ErrorResponse } from '../error';
-import { ActionPlaylistsResponse, PlaylistsResponse, TVMovie } from '../store/types';
+import { PlaylistMoviesResponse, PlaylistsResponse, Success, TVMovie } from '../store/types';
 
 const url = process.env.VITE_API_URL as string;
 
 type AddInPlaylistProps = {
     id: string;
     movie: TVMovie;
-    on: string;
     access_token: string;
     oauth_token: string;
 };
 
-export const AddInPlaylist = async ({ id, movie, access_token, oauth_token, on }: AddInPlaylistProps) => {
+export const GetPlaylists = async (access_token: string, oauth_token: string) => {
+    let res = await fetch(`${url}/v1/api/app/playlists`, {
+        headers: {
+            jwtToken: `Bearer ${access_token}`,
+            Authorization: `Bearer ${oauth_token}`
+        },
+        method: 'GET'
+    });
+    if (res.status === 403) return ErrorAccess.FORBIDDEN;
+    if (res.status === 401) return ErrorAccess.UNAUTHORIZED;
+    return await res.json().then((r: PlaylistsResponse) => {
+        return r;
+    });
+};
+
+export const AddInPlaylist = async ({ id, movie, access_token, oauth_token }: AddInPlaylistProps) => {
     let res: Response = await fetch(`${url}/v1/api/app/playlists/add/${id}`, {
         headers: {
             'Content-Type': 'application/json',
@@ -20,13 +34,12 @@ export const AddInPlaylist = async ({ id, movie, access_token, oauth_token, on }
         },
         method: 'PUT',
         body: JSON.stringify({
-            movies: movie,
-            on: on
+            mid: movie.id
         })
     });
     if (res.status === 403) return ErrorAccess.FORBIDDEN;
     if (res.status === 401) return ErrorAccess.UNAUTHORIZED;
-    return await res.json().then((res: ActionPlaylistsResponse) => {
+    return await res.json().then((res: Success) => {
         return res;
     });
 };
@@ -41,7 +54,7 @@ export const RemoveFromPlaylist = async (id: string, mid: number, access_token: 
     });
     if (res.status === 403) return ErrorAccess.FORBIDDEN;
     if (res.status === 401) return ErrorAccess.UNAUTHORIZED;
-    return await res.json().then((res: ActionPlaylistsResponse) => {
+    return await res.json().then((res: Success) => {
         return res;
     });
 };
@@ -56,19 +69,9 @@ export const GetPlaylistMoveByID = async (id: string, access_token: string, oaut
     });
     if (res.status === 403) return ErrorAccess.FORBIDDEN;
     if (res.status === 401) return ErrorAccess.UNAUTHORIZED;
-    return await res.json().then((r: PlaylistsResponse) => {
+    return await res.json().then((r: PlaylistMoviesResponse) => {
         return r;
     });
-    // const res = await response.json().then((res: PlaylistsResponse) => {
-    //     if (res.success) {
-    //         if (!res.movies) return [];
-    //         const arr = res.movies.map(m => m.id);
-    //         const r = res.movies.filter(({ id }, index) => !arr.includes(id, index + 1));
-    //         return r;
-    //     } else {
-    //         return null;
-    //     }
-    // });
 };
 
 export const DeletePlaylist = async (id: string, access_token: string, oauth_token: string) => {

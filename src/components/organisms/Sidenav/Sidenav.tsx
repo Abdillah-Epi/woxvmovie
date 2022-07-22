@@ -3,11 +3,11 @@ import { useRecoilState } from 'recoil';
 import { SideNavAtom } from '../../../store/nav';
 import logo from '../../../assets/images/logo.svg';
 import Button from '../../atoms/Button';
-import arrowr from '../../../assets/images/arrowr.svg';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from '@tanstack/react-location';
 import { LocationGenerics } from '../../../router';
 import { SlideAnimation } from './motion';
+import useAuth from '../../../hooks/useAuth';
 
 export type Links = {
     text: string;
@@ -21,6 +21,9 @@ type SidenavProps = {
 const Sidenav: React.FC<SidenavProps> = ({ links = [] }) => {
     const [isOpen, OpenSideNav] = useRecoilState(SideNavAtom);
     const navigate = useNavigate<LocationGenerics>();
+
+    const { logout, deleteAccount } = useAuth();
+
     return (
         <AnimatePresence exitBeforeEnter>
             {isOpen && (
@@ -33,6 +36,8 @@ const Sidenav: React.FC<SidenavProps> = ({ links = [] }) => {
                                     <div
                                         onClick={() => {
                                             OpenSideNav(() => false);
+                                            if (item.path === '/signin') return logout();
+                                            if (item.path === '/signup') return deleteAccount();
                                             navigate({ to: item.path });
                                         }}
                                         key={key}

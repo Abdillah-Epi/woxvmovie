@@ -20,7 +20,7 @@ const FooterLinks = () => {
         <div className='grid w-full grid-cols-3 gap-x-4 gap-y-2 sm:grid-cols-4'>
             {links.map((link, key) => {
                 return (
-                    <a key={key} href='/landing' className='text-grey hover:text-grey-dark text-xs'>
+                    <a key={key} href='/signin' className='text-grey hover:text-grey-dark text-xs'>
                         {link}
                     </a>
                 );

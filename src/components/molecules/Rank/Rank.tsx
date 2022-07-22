@@ -21,7 +21,7 @@ const ranks: string[] = [one, two, three, four, five, six, seven, heigh, nine, t
 const Rank: React.FC<RankProps> = ({ rank, path }) => {
     return (
         <div className='relative flex w-[70%]'>
-            <img className='absolute h-48 md:h-64' src={ranks[rank]} alt='' />
+            <img className='absolute h-60 sm:h-64' src={ranks[rank]} alt='' />
             <div className='h-[80%] w-[80%] translate-x-20 md:translate-x-28'>
                 <Display theme='poster' className='rounded-md' path={path!} />
             </div>

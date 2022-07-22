@@ -12,11 +12,11 @@ const OAuth2 = () => {
     useEffect(() => {
         getAccess(param.token!, location.pathname === `/signup/oauth2/${param.token}` ? 'signup' : 'signin').then(
             res => {
-                if (res && !res.success) navigate({ to: '/landing' });
+                if (res && !res.success) navigate({ to: '/signin' });
                 if (location.pathname === `/signup/oauth2/${param.token}`) {
                     navigate({ to: '/genres' });
                 } else {
-                    navigate({ to: '/landing' });
+                    navigate({ to: '/signin' });
                 }
             }
         );

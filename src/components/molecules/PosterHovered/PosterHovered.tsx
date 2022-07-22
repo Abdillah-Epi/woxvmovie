@@ -28,9 +28,9 @@ const PosterHovered: React.FC<PosterHoveredProps> = ({ children, movie, on, titl
             </div>
             <Average average={movie.vote_average} />
             <div className='w-[80%]'>
-                <Typography className='text-justify text-xs text-white' title={movie.overview} />
+                <Typography className='text-justify text-xs text-white hidden xl:[display:block]' title={movie.overview} />
             </div>
-            <div className='flex w-[80%] items-center space-x-6'>{children}</div>
+            <div className='flex w-[80%] items-center justify-center space-x-6'>{children}</div>
         </div>
     );
 };

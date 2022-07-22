@@ -12,36 +12,34 @@ import { TVMovie } from '../../../store/types';
 import { useMatch, useNavigate } from '@tanstack/react-location';
 import { LocationGenerics } from '../../../router';
 import PosterHovered from '../PosterHovered';
-import { LikeAction } from '../../../hooks/useLikeAction';
+import useLikeAction from '../../../hooks/useLikeAction';
 import { ViewsAtomFamily } from '../../../store/views';
-import { FavoritesAtomFamily } from '../../../store/linkes';
 
 type PosterInfosProps = {
     movie: TVMovie;
     title: string;
     on: string;
-    LikeCallback: React.Dispatch<React.SetStateAction<LikeAction | undefined>>;
     PlaylistCallback: (movie: TVMovie, on: string) => void;
 };
 
-const PosterActions: React.FC<PosterInfosProps> = ({ title, movie, on, LikeCallback, PlaylistCallback }) => {
+const PosterActions: React.FC<PosterInfosProps> = ({ title, movie, on, PlaylistCallback }) => {
     const selectMovie = useSetRecoilState(movieSelectedAtom);
     const navigate = useNavigate<LocationGenerics>();
     const params = useMatch<LocationGenerics>().params;
     const isViewed = useRecoilValue(ViewsAtomFamily(movie.id));
-    const isLike = useRecoilValue(FavoritesAtomFamily(movie.id));
+    const [isLiked, LikeCallback] = useLikeAction(movie.id, movie, on);
 
     return (
         <PosterHovered
-            className='absolute inset-0 flex h-full w-full flex-col items-center justify-center space-y-10'
+            className='absolute inset-0 flex h-full w-full flex-col items-center justify-center xl:space-y-10'
             movie={movie}
             on={on}
             title={title}
         >
             <img
-                onClick={() => LikeCallback({ action: isLike ? 'unlike' : 'like', movie: movie })}
+                onClick={() => LikeCallback()}
                 className='h-5 w-5 cursor-pointer'
-                src={isLike ? heart_pink : heart}
+                src={isLiked ? heart_pink : heart}
                 alt=''
             />
             <img

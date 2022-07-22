@@ -20,7 +20,7 @@
     {
         "text": "Playlists",
         "color": "text-white",
-        "path": "/app/playlist/landing",
+        "path": "/app/playlist",
         "styles": "font-light"
     },
     {

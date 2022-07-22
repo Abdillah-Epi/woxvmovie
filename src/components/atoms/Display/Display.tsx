@@ -1,6 +1,5 @@
 import React from 'react';
 import { overrideTailwindClasses as otc } from 'tailwind-override';
-
 type DisplayProps = React.ImgHTMLAttributes<HTMLImageElement> & {
     path: string;
     theme: 'backdrop' | 'poster';

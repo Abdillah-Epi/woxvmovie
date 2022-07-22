@@ -24,7 +24,7 @@ const Category: React.FC<AddCategoryProps> = ({ category, index }) => {
             </div>
 
             <CharedElement name={category.name} onClick={Add}>
-                <Typography title={category.name} className='text-white ' />
+                <Typography title={category.name} className='text-center text-xs text-white md:text-xl' />
             </CharedElement>
         </EaseInOut>
     );
