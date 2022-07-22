@@ -15,7 +15,7 @@
 # This is a list of what you can do in the website 🚀
 
 1. create an account with just an email and password (or with google 🚧).
-2. signin with an email/passord (or with google 🚧).
+2. signin with an email/passord (or with google 🚧 ).
 3. on signup you will be redirect to a page to select your favorites categories.
 4. like movies and put them in your list.
 5. create playlists.
